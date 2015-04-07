@@ -7,6 +7,7 @@
  */
 class Bulk_Term_Generator_Activator {
 
-    // Nothing currently happens during actication
+    // Nothing currently happens during activation
+    public static function activate() {}
 
 }
