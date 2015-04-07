@@ -37,7 +37,7 @@ function bulk_term_generator_autoloader( $class ) {
 
     // If it's not one of my classes, ignore it
     if ( substr( $class, 0, 19 ) != 'bulk-term-generator' )
-        return;
+        return false;
 
     // Check if the file exists, and if it does, include it
     if ( file_exists ( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php' ) ){
@@ -50,36 +50,22 @@ function bulk_term_generator_autoloader( $class ) {
 /**
  * The code that runs during plugin activation.
  */
-function activate_plugin_name() {
-    require_once plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator-activator.php';
-    Plugin_Name_Activator::activate();
+function activate_bulk_term_generator() {
+    Bulk_Term_Generator_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  */
-function deactivate_plugin_name() {
-    require_once plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator-deactivator.php';
-    Plugin_Name_Deactivator::deactivate();
+function deactivate_bulk_term_generator() {
+    Bulk_Term_Generator_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_plugin_name' );
-register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator.php';
+register_activation_hook( __FILE__, 'activate_bulk_term_generator' );
+register_deactivation_hook( __FILE__, 'deactivate_bulk_term_generator' );
 
 /**
  * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
  */
 function run_bulk_term_generator() {
 
