@@ -1,14 +1,14 @@
 (function( $ ) {
-	'use strict';
+    'use strict';
 
-	// The page is ready
-	$(function() {
+    // The page is ready
+    $(function() {
 
-	});
+    });
 
-	// The window has loaded
-	$( window ).load(function() {
+    // The window has loaded
+    $( window ).load(function() {
 
-	});
+    });
 
 })( jQuery );

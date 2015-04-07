@@ -23,25 +23,44 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	die;
+    die;
+}
+
+/**
+ * Use an autoloader to load classes automatically
+ */
+spl_autoload_register( 'bulk_term_generator_autoloader' );
+
+function bulk_term_generator_autoloader( $class ) {
+
+    $class = strtolower( str_replace('_', '-', $class) );
+
+    // If it's not one of my classes, ignore it
+    if ( substr( $class, 0, 19 ) != 'bulk-term-generator' )
+        return;
+
+    // Check if the file exists, and if it does, include it
+    if ( file_exists ( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php' ) ){
+
+        include( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php');
+
+    }
 }
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in classes/class-bulk-term-generator-activator.php
  */
 function activate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator-activator.php';
-	Plugin_Name_Activator::activate();
+    require_once plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator-activator.php';
+    Plugin_Name_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in classes/class-bulk-term-generator-deactivator.php
  */
 function deactivate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+    require_once plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator-deactivator.php';
+    Plugin_Name_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_plugin_name' );
@@ -64,8 +83,8 @@ require plugin_dir_path( __FILE__ ) . 'classes/class-bulk-term-generator.php';
  */
 function run_bulk_term_generator() {
 
-	$plugin = new Bulk_Term_Generator();
-	$plugin->run();
+    $plugin = new Bulk_Term_Generator();
+    $plugin->run();
 
 }
 run_bulk_term_generator();

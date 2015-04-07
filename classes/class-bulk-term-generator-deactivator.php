@@ -7,6 +7,6 @@
  */
 class Bulk_Term_Generator_Deactivator {
 
-	// Nothing currently happens during deactivation
+    // Nothing currently happens during deactivation
 
 }
