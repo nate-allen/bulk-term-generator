@@ -2,9 +2,6 @@
 
 /**
  * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and the admin-specific stylesheet and
- * JavaScript.
  */
 class Bulk_Term_Generator_Admin {
 
@@ -40,7 +37,7 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_styles() {
 
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/plugin-name-admin.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bulk-term-generator-admin.css', array(), $this->version, 'all' );
 
     }
 
@@ -49,7 +46,28 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_scripts() {
 
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/plugin-name-admin.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bulk-term-generator-admin.js', array( 'jquery' ), $this->version, false );
+
+    }
+
+    /**
+     * Add Bulk Term Generator to the Admin Menu under Tools
+     */
+    public function add_to_menu() {
+
+        add_submenu_page( 'tools.php', 'Bulk Term Generator', 'Bulk Term Generator', 'manage_options', 'bulk_term_generator_options', array($this, 'options_page') );
+
+    }
+
+    public function options_page() {
+
+        $html  = '<div class="wrap">';
+        $html .=    '<h2>Bulk Term Generator</h2>';
+        $html .=    '<form action="options.php" method="post">';
+        $html .=    '</form>';
+        $html .= '</div>';
+
+        echo $html;
 
     }
 
