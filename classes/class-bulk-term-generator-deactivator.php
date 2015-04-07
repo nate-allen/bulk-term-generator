@@ -8,5 +8,9 @@
 class Bulk_Term_Generator_Deactivator {
 
     // Nothing currently happens during deactivation
+    public static function deactivate() {
+
+    }
+
 
 }
