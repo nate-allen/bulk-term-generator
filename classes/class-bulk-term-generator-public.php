@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  */
 
-class Plugin_Name_Public {
+class Bulk_Term_Generator_Public {
 
     /**
      * The ID of this plugin.
@@ -38,7 +38,7 @@ class Plugin_Name_Public {
      */
     public function enqueue_styles() {
 
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/plugin-name-public.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bulk-term-generator-public.css', array(), $this->version, 'all' );
 
     }
 
@@ -47,7 +47,7 @@ class Plugin_Name_Public {
      */
     public function enqueue_scripts() {
 
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/plugin-name-public.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bulk-term-generator-public.js', array( 'jquery' ), $this->version, false );
 
     }
 
