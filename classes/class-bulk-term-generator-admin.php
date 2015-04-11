@@ -6,6 +6,11 @@
 class Bulk_Term_Generator_Admin {
 
     /**
+     * Template Paths
+     */
+    private $settings_page_template;
+
+    /**
      * The ID of this plugin.
      *
      * @var      string    $plugin_name    The ID of this plugin.
@@ -27,8 +32,9 @@ class Bulk_Term_Generator_Admin {
      */
     public function __construct( $plugin_name, $version ) {
 
-        $this->plugin_name = $plugin_name;
-        $this->version = $version;
+        $this->settings_page_template = 'views/admin/templates/settings_page_default.php';
+        $this->plugin_name            = $plugin_name;
+        $this->version                = $version;
 
     }
 
@@ -37,7 +43,7 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_styles() {
 
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/bulk-term-generator-admin.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.css', array(), $this->version, 'all' );
 
     }
 
@@ -46,7 +52,7 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_scripts() {
 
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bulk-term-generator-admin.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( $this->plugin_name, plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.js', array( 'jquery' ), $this->version, false );
 
     }
 
@@ -61,13 +67,19 @@ class Bulk_Term_Generator_Admin {
 
     public function options_page() {
 
-        $html  = '<div class="wrap">';
-        $html .=    '<h2>Bulk Term Generator</h2>';
-        $html .=    '<form action="options.php" method="post">';
-        $html .=    '</form>';
-        $html .= '</div>';
+        $template_path = BULK_TERM_GENERATOR_PATH . $this->settings_page_template;
 
-        echo $html;
+        $template = new Bulk_Term_Generator_Template( $template_path );
+
+        // Generate taxonomy select list
+        $taxonomy_select_list = array(
+            'taxonomy_select_list' => $template->taxonomy_select_list()
+        );
+
+        // Add the taxonomy select list to the template
+        $template->add_data( $taxonomy_select_list );
+
+        echo $template->render();
 
     }
 
