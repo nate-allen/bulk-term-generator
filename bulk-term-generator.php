@@ -27,6 +27,11 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
+ * Define a constant for the plugin path
+ */
+define("BULK_TERM_GENERATOR_PATH", plugin_dir_path(__FILE__) );
+
+/**
  * Use an autoloader to load classes automatically
  */
 spl_autoload_register( 'bulk_term_generator_autoloader' );
