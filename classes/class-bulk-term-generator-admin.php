@@ -7,22 +7,39 @@ class Bulk_Term_Generator_Admin {
 
     /**
      * Template Paths
+     *
+     * All of the possible templates that can be loaded
      */
     private $settings_page_template;
+    private $generate_terms_page_template;
 
     /**
      * The ID of this plugin.
      *
-     * @var      string    $plugin_name    The ID of this plugin.
+     * @var    string    $plugin_name    The ID of this plugin.
      */
     private $plugin_name;
 
     /**
      * The version of this plugin.
      *
-     * @var      string    $version    The current version of this plugin.
+     * @var    string    $version    The current version of this plugin.
      */
     private $version;
+
+    /**
+     * Array to hold data used in templates
+     *
+     * @var    array    $data    Associative array. Key is variable name, value is its value
+     */
+    private $data = array();
+
+    /**
+     * Template file
+     *
+     * @var    string    File path to the template file that should be loaded
+     */
+    private $template;
 
     /**
      * Initialize the class and set its properties.
@@ -32,9 +49,11 @@ class Bulk_Term_Generator_Admin {
      */
     public function __construct( $plugin_name, $version ) {
 
-        $this->settings_page_template = 'views/admin/templates/settings_page_default.php';
-        $this->plugin_name            = $plugin_name;
-        $this->version                = $version;
+        $this->settings_page_template       = BULK_TERM_GENERATOR_PATH.'views/admin/templates/settings_page_default.php';
+        $this->generate_terms_page_template = BULK_TERM_GENERATOR_PATH.'views/admin/templates/generate_terms_page.php';
+
+        $this->plugin_name = $plugin_name;
+        $this->version     = $version;
 
     }
 
@@ -43,7 +62,7 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_styles() {
 
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.css', array(), $this->version, 'all' );
+        wp_register_style( $this->plugin_name.'-admin', plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.css', array(), $this->version, 'all' );
 
     }
 
@@ -52,7 +71,7 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_scripts() {
 
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.js', array( 'jquery' ), $this->version, false );
+        wp_register_script( $this->plugin_name.'-admin', plugin_dir_url( dirname(__FILE__) ) . 'views/admin/js/bulk-term-generator-admin.js', array( 'jquery' ), $this->version, false );
 
     }
 
@@ -67,18 +86,76 @@ class Bulk_Term_Generator_Admin {
 
     public function options_page() {
 
-        $template_path = BULK_TERM_GENERATOR_PATH . $this->settings_page_template;
+        // Normal page load, not a form submit. Load the default page
+        if ( !isset( $_POST['action'] ) && !isset($_GET['taxonomy']) ) {
 
-        $template = new Bulk_Term_Generator_Template( $template_path );
+            $this->data['taxonomy_select_list'] = array( 'taxonomy_select_list' => array( 'id' => 'chosen_taxonomy' ) );
+            $this->load_default_page();
 
-        // Generate taxonomy select list
-        $taxonomy_select_list = array(
-            'taxonomy_select_list' => $template->taxonomy_select_list()
-        );
+            return;
 
-        // Add the taxonomy select list to the template
-        $template->add_data( $taxonomy_select_list );
+        }
 
+        // If the taxonomy is in the URL parameter
+        if ( isset($_GET['taxonomy']) ) {
+
+            $taxonomy = get_taxonomy( $_GET['taxonomy'] );
+            $taxonomy_slug = $_GET['taxonomy'];
+            $taxonomy_name = $taxonomy->labels->name;
+            $taxonomy_terms = get_terms($_GET['taxonomy'], array('hide_empty' => false));
+            $term_list = array();
+
+            // Loop through terms and add them to $term_list
+            foreach ($taxonomy_terms as $taxonomy_term) {
+                array_push($term_list, $taxonomy_term->name);
+            }
+
+            $this->data['is_hierarchical'] = $taxonomy->hierarchical;
+            $this->data['taxonomy_slug'] = $taxonomy_slug;
+            $this->data['taxonomy_name'] = $taxonomy_name;
+            $this->data['terms'] = $taxonomy_terms;
+            $this->data['term_list'] = array( 'unordered_list' => array( 'items' => $term_list, 'id' => 'term-list' ) );
+            $this->data['term_select_list'] = array( 'term_select_list' => array( 'taxonomy' => $taxonomy_slug, 'id' => 'parent_term' ) );
+            $this->load_generate_terms_page();
+
+        }
+
+        // If the user submitted the "Choose a Taxonomy" form
+        if ( isset( $_POST['action'] ) && $_POST['action'] == 'taxonomy_selected' ) {
+
+            if ( empty( $_POST['chosen_taxonomy'] ) ){
+
+                $this->data['error'] = 'Please choose a taxonomy';
+                $this->data['taxonomy_select_list'] = array( 'taxonomy_select_list' => array( 'id' => 'chosen_taxonomy' ) );
+                $this->load_default_page();
+
+            }
+            // If the user did choose a taxonomy, add it to the URL parameter
+            else {
+
+                wp_redirect( add_query_arg( 'taxonomy', $_POST['chosen_taxonomy'] ) );exit;
+
+            }
+
+        }
+
+    }
+
+    private function load_default_page() {
+
+        wp_enqueue_style('bulk-term-generator-admin');
+        $template_path = $this->settings_page_template;
+        $template = new Bulk_Term_Generator_Template( $template_path, $this->data );
+        echo $template->render();
+
+    }
+
+    private function load_generate_terms_page() {
+
+        wp_enqueue_style('bulk-term-generator-admin');
+        wp_enqueue_script('bulk-term-generator-admin');
+        $template_path = $this->generate_terms_page_template;
+        $template = new Bulk_Term_Generator_Template( $template_path, $this->data );
         echo $template->render();
 
     }
