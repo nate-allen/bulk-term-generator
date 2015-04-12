@@ -19,6 +19,7 @@ class Bulk_Term_Generator_Template {
 
         $this->file_path = $file_path;
         $this->data      = $data;
+        $this->pre_proccess_data();
 
     }
 
@@ -58,6 +59,31 @@ class Bulk_Term_Generator_Template {
     }
 
     /**
+     * Pre-process Data
+     *
+     * Loop through the data array and see if any of the values match the
+     * function names in this class (in the approved list). If it does, run that function and
+     * add the output to the data array.
+     *
+     * For example, if the data array has a value of 'taxonomy_select_list', we need to run that
+     * function and add the resulting html to the template data.
+     */
+    private function pre_proccess_data() {
+
+        $functions = array( 'taxonomy_select_list', 'term_select_list', 'unordered_list' );
+
+        foreach ($this->data as $key => $value) {
+            if (!is_array($value))
+                continue;
+            if ( in_array(key($value), $functions, true) ){
+                $array = array_values($value);
+                $this->data[$key] = $this->{key($value)}( array_shift($array) );
+            }
+        }
+
+    }
+
+    /**
      * Add data
      *
      * If data needs to be added after instantiation, it can be passed here before
@@ -67,7 +93,7 @@ class Bulk_Term_Generator_Template {
      */
     public function add_data( $data ) {
 
-        ( is_array($this->data) ) ? array_merge( $this->data, $data ) : $this->data = $data;
+        ( is_array($this->data) && !empty($this->data) ) ? $this->data = array_merge( $data, $this->data ) : $this->data = $data;
 
     }
 
@@ -99,7 +125,7 @@ class Bulk_Term_Generator_Template {
         $taxonomies = array_diff_key( $all_taxonomies, array_flip( $ignored_taxonomies ) );
 
         // Start building the select list HTML
-        $html = '<select id="'.$options['id'].'" class="'.$options['class'].'">';
+        $html = '<select id="'.$options['id'].'" name="'.$options['id'].'" class="'.$options['class'].'">';
 
         // If there are no taxonomies (which is rare), return an empty select list.
         if ( empty($taxonomies) ) {
@@ -114,6 +140,74 @@ class Bulk_Term_Generator_Template {
         }
 
         $html .= '</select>';
+
+        return $html;
+
+    }
+
+    public function term_select_list( $args = array() ) {
+
+        // Setup default options
+        $defaults = array(
+            'taxonomy' => 'category',
+            'id' => 'taxonomy-list',
+            'class' => 'select',
+            'value' => 'term_id'
+        );
+
+        // Combine default options with passed arguments
+        $options = array_merge($defaults, $args);
+
+        // Get all of the terms for the given taxonomy
+        $terms = get_terms( $options['taxonomy'], array( 'hide_empty' => false ) );
+
+        // Start building the select list HTML
+        $html  = '<select id="'.$options['id'].'" name="'.$options['id'].'" class="'.$options['class'].'">';
+        $html .= '<option></option>';
+
+        foreach ($terms as $term) {
+            $html .= '<option value="'.$term->{$options['value']}.'">'.$term->name.'</option>';
+        }
+
+        $html .= "</select>";
+
+        return $html;
+
+    }
+
+    /**
+     * Unordered List
+     *
+     * Generates an unorderd list
+     *
+     * @param     array    $args    List of options
+     * @return    string            Unordered list (html)
+     */
+    public function unordered_list( $args = array() ) {
+
+        // Setup default options
+        $defaults = array(
+            'id' => '',
+            'class' => '',
+            'items' => null
+        );
+
+        // Combine default options with passed arguments
+        $options = array_merge($defaults, $args);
+
+        $html  = '<ul';
+        $html .= ( $options['id'] != '' ) ? ' id="'.$options['id'].'"' : '';
+        $html .= ( $options['class'] != '' ) ? ' class="'.$options['class'].'">' : '>';
+
+        // If there are no items, just return an empty unordered list
+        if ( empty($options['items']) || !is_array($options['items']) )
+            return $html .= '</ul>';
+
+        foreach ($options['items'] as $item) {
+            $html .= '<li>'.$item.'</li>';
+        }
+
+        $html .= '</ul>';
 
         return $html;
 
