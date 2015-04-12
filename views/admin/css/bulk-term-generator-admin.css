@@ -1,8 +1,28 @@
-.bulk-term-generator label {
-    font-weight: bold;
-    margin: 0 25px 0 0;
-}
+/**
+ * Page: Default
+ */
 #btg-default select {
     min-width: 200px;
+    max-width: 100%;
+}
+
+/**
+ * Page: Generate Terms
+ */
+#btg-generate-terms #terms-to-add {
+    width: 100%;
+    max-width: 800px;
+}
+#btg-generate-terms .example {
+    font-family: monospace;
+}
+#btg-generate-terms .sorry {
+    color: #B0B0B0;
+}
+#btg-generate-terms #term-list-container li {
+    margin-left: 2em;
+}
+#btg-generate-terms #parent_term {
+    min-width: 300px;
     max-width: 100%;
 }
