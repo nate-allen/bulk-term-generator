@@ -5,6 +5,8 @@ class Bulk_Term_Generator_Template {
     private $file_path;
     private $data;
     private $template;
+    private $select_options = '';
+    private $list_items = '';
 
     /**
      * Constructor
@@ -70,7 +72,7 @@ class Bulk_Term_Generator_Template {
      */
     private function pre_proccess_data() {
 
-        $functions = array( 'taxonomy_select_list', 'term_select_list', 'unordered_list' );
+        $functions = array( 'taxonomy_select_list', 'term_select_list', 'html_list' );
 
         foreach ($this->data as $key => $value) {
             if (!is_array($value))
@@ -159,15 +161,20 @@ class Bulk_Term_Generator_Template {
         $options = array_merge($defaults, $args);
 
         // Get all of the terms for the given taxonomy
-        $terms = get_terms( $options['taxonomy'], array( 'hide_empty' => false ) );
+        $terms = get_terms( $options['taxonomy'], array( 'hide_empty' => false, 'parent' => 0 ) );
 
         // Start building the select list HTML
         $html  = '<select id="'.$options['id'].'" name="'.$options['id'].'" class="'.$options['class'].'">';
         $html .= '<option></option>';
 
+        // Reset the selection options variable
+        $this->select_options = '';
+
         foreach ($terms as $term) {
-            $html .= '<option value="'.$term->{$options['value']}.'">'.$term->name.'</option>';
+            $this->get_select_options( $options['taxonomy'], $term );
         }
+
+        $html .= $this->select_options;
 
         $html .= "</select>";
 
@@ -176,42 +183,122 @@ class Bulk_Term_Generator_Template {
     }
 
     /**
-     * Unordered List
+     * HTML List
      *
-     * Generates an unorderd list
+     * Generates an unorderd or ordered HTML list
      *
      * @param     array    $args    List of options
-     * @return    string            Unordered list (html)
+     * @return    string            Unordered/ordered list (html)
      */
-    public function unordered_list( $args = array() ) {
+    public function html_list( $args = array() ) {
 
         // Setup default options
         $defaults = array(
             'id' => '',
             'class' => '',
-            'items' => null
+            'taxonomy' => 'category',
+            'list_type' => 'ul'
         );
 
         // Combine default options with passed arguments
         $options = array_merge($defaults, $args);
 
-        $html  = '<ul';
+        // Get all of the terms for the given taxonomy
+        $terms = get_terms( $options['taxonomy'], array( 'hide_empty' => false, 'parent' => 0 ) );
+
+        $html  = '<'.$options['list_type'];
         $html .= ( $options['id'] != '' ) ? ' id="'.$options['id'].'"' : '';
         $html .= ( $options['class'] != '' ) ? ' class="'.$options['class'].'">' : '>';
 
-        // If there are no items, just return an empty unordered list
-        if ( empty($options['items']) || !is_array($options['items']) )
-            return $html .= '</ul>';
+        // Reset the selection options variable
+        $this->select_options = '';
 
-        foreach ($options['items'] as $item) {
-            $html .= '<li>'.$item.'</li>';
+        foreach ($terms as $term) {
+            $this->get_list_items( $options['taxonomy'], $term, $options['list_type'] );
         }
 
-        $html .= '</ul>';
+        $html .= $this->list_items.'</ul>';
 
         return $html;
 
     }
 
+    /**
+     * Get Seperators
+     *
+     * Will return seperators for each nested level the term is under
+     *
+     * @param  int       $term_id     The term's ID
+     * @param  string    $taxonomy    The taxonomy the term belongs to
+     * @return string                 A seperator for each level
+     */
+    private function get_seperators( $term_id, $taxonomy, $seperator  = '&#8212;' ){
+
+        $seperators = '';
+        $term = get_term( $term_id, $taxonomy );
+
+        while( $term->parent != 0 ){
+            $term = get_term( $term->parent, $taxonomy );
+            $seperators .= $seperator;
+        }
+
+        return $seperators;
+    }
+
+    /**
+     * Get Select Options
+     *
+     * Recursive function that generates the HTML options for each term. The HTML
+     * is stored in the private variable "$select_options" so it can be accessed
+     * after its done.
+     *
+     * @param  string    $taxonomy The taxonomy slug
+     * @param  object    $term     The term object
+     */
+    private function get_select_options( $taxonomy, $term ){
+
+        $this->select_options .= '<option value="'.$term->term_id.'" data-parent="'.$term->parent.'" data-name="'.$term->name.'">'.$this->get_seperators($term->term_id,$taxonomy).$term->name.'</option>';
+
+        $children = get_terms( $taxonomy, array('parent' => $term->term_id, 'hide_empty' => '0'));
+
+        if (!empty($children)) {
+            foreach ($children as $child ) {
+                $this->get_select_options( $taxonomy, $child);
+            }
+        }
+
+    }
+
+    /**
+     * Get List Items
+     *
+     * Recursive function that generates the HTML list items for each term. The HTML
+     * is stored in the private variable "$list_items" so it can be accessed
+     * after its done.
+     *
+     * @param  string    $taxonomy The taxonomy slug
+     * @param  object    $term     The term object
+     */
+    private function get_list_items( $taxonomy, $term, $ul ){
+
+        $children = get_terms( $taxonomy, array('parent' => $term->term_id, 'hide_empty' => '0'));
+
+        if (!empty($children)) {
+
+            $this->list_items .= '<li>'.$term->name.'<'.$ul.'>';
+
+            foreach ($children as $child ) {
+                $this->get_list_items( $taxonomy, $child, $ul);
+            }
+
+            $this->list_items .= '</'.$ul.'></li>';
+
+        } else {
+
+            $this->list_items .= '<li>'.$term->name.'</li>';
+
+        }
+
+    }
 
 }
