@@ -22,10 +22,12 @@
 
     <h3>Add Terms</h3>
 
-    <p>Enter each term below on its own line.</p>
+    <div class="instructions">
+        <p><strong>Enter each term below <span>on its own line</span>.</strong></p>
+    </div>
 
-    <p><strong>Optional:</strong> You can specify the "slug" and "description" for each term by seperating them with commas.<br>
-    <span class="example">(ie: United States, united_states, Population is 317 Million)</span></p>
+    <p><span class="tip"><strong>Optional:</strong> You can specify the "slug" and "description" for each term by seperating them with commas.<br>
+    <span class="example">(ie: United States, united_states, Population is 317 Million)</span></span></p>
 
     <textarea id="terms-to-add" rows="10" class="example"></textarea>
 
@@ -44,8 +46,8 @@
         </tbody>
     </table>
 
-    <p><strong>Note:</strong> Terms won't be generated when you press the button below.<br>
-    You will have an opportunity to delete terms or start over before actually generating the terms in bulk.</p>
+    <p><span class="tip"><strong>Note:</strong> Terms won't be generated when you press the button below.<br>
+    You will have an opportunity to delete terms or start over before actually generating the terms in bulk.</span></p>
 
     <p class="submit">
         <input type="submit" class="button button-secondary" id="add-terms" value="Add Terms">
