@@ -26,3 +26,15 @@
     min-width: 300px;
     max-width: 100%;
 }
+#btg-generate-terms .instructions p {
+    font-size: 110%;
+}
+#btg-generate-terms .instructions p span {
+    text-decoration: underline;
+}
+
+#btg-generate-terms .tip {
+    border: 1px solid #AEAEAE;
+    display: inline-block;
+    padding: 10px;
+}
