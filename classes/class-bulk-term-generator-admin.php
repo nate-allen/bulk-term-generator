@@ -103,18 +103,12 @@ class Bulk_Term_Generator_Admin {
             $taxonomy_slug = $_GET['taxonomy'];
             $taxonomy_name = $taxonomy->labels->name;
             $taxonomy_terms = get_terms($_GET['taxonomy'], array('hide_empty' => false));
-            $term_list = array();
-
-            // Loop through terms and add them to $term_list
-            foreach ($taxonomy_terms as $taxonomy_term) {
-                array_push($term_list, $taxonomy_term->name);
-            }
 
             $this->data['is_hierarchical'] = $taxonomy->hierarchical;
             $this->data['taxonomy_slug'] = $taxonomy_slug;
             $this->data['taxonomy_name'] = $taxonomy_name;
             $this->data['terms'] = $taxonomy_terms;
-            $this->data['term_list'] = array( 'unordered_list' => array( 'items' => $term_list, 'id' => 'term-list' ) );
+            $this->data['term_list'] = array( 'html_list' => array( 'taxonomy' => $taxonomy_slug, 'id' => 'term-list' ) );
             $this->data['term_select_list'] = array( 'term_select_list' => array( 'taxonomy' => $taxonomy_slug, 'id' => 'parent_term' ) );
             $this->load_generate_terms_page();
 
