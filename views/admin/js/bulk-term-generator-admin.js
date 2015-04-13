@@ -4,13 +4,19 @@
     // The page is ready
     $(function() {
 
-        var terms_array = [],
-            hierarchy   = [],
-            new_id      = 1;
+        var terms_array    = [],
+            hierarchy      = [],
+            new_id         = 1,
+            select_options = '',
+            list_items     = '',
+            seperator      = 0;
 
 
         $('#add-terms').on('click', function(e){
             e.preventDefault();
+
+            if ($('#terms-to-add').val() === '')
+                return false;
 
             // The new terms to be added, and the parent they should be added to
             var terms_to_add = $('#terms-to-add').val().split('\n'),
@@ -31,17 +37,25 @@
             // Create object for each new term. Added to terms_array
             create_objects( terms_to_add, parent_term);
 
-            //console.log(terms_array);
-            //console.log(build_hierarchy(terms_array));
-
             // Build the hierarchy
-            build_hierarchy(terms_array);
+            build_hierarchy();
 
             // Update the select list
             update_select_list();
 
             // Update the term list
             update_term_list();
+
+            // Clear the "terms to add" textarea
+            $('#terms-to-add').val('');
+
+            // Scroll to the top of the page
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+
+            // Reset everything
+            select_options = '';
+            seperator = 0;
+            list_items = '';
 
         });
 
@@ -92,13 +106,13 @@
 
         };
 
-        var build_hierarchy = function(arry) {
+        var build_hierarchy = function() {
 
             var roots = [], children = {};
 
             // find the top level nodes and hash the children based on parent
-            for (var i = 0, len = arry.length; i < len; ++i) {
-                var item = arry[i],
+            for (var i = 0, len = terms_array.length; i < len; ++i) {
+                var item = terms_array[i],
                     p = item.Parent,
                     target = !p ? roots : (children[p] || (children[p] = []));
 
@@ -122,6 +136,61 @@
 
             hierarchy = roots;
 
+        };
+
+        var update_select_list = function() {
+
+            for (var i = 0; i < hierarchy.length; i++) {
+                get_select_options(hierarchy[i]);
+            }
+
+            $('#parent_term').empty().append('<option></option>'+select_options);
+
+        };
+
+        var update_term_list = function() {
+
+            for (var i = 0; i < hierarchy.length; i++) {
+                get_list_items(hierarchy[i]);
+            }
+
+            $('#term-list-container').html('<ul id="term-list">'+list_items+'</ul>');
+
+        };
+
+        var get_select_options = function( data ) {
+
+            select_options += '<option value="'+data.value.Id+'" data-parent="'+data.value.Parent+'" data-name="'+data.value.Name+'">'+create_seperators(seperator)+data.value.Name+'</option>';
+            if ( data.children ) {
+                ++seperator;
+                for (var i = 0; i < data.children.length; i++) {
+                    get_select_options( data.children[i] );
+                }
+                --seperator;
+            }
+
+        };
+
+        var get_list_items = function( data ) {
+
+            if (data.children) {
+                list_items += '<li>'+data.value.Name+'<ul>';
+                for (var i = 0; i < data.children.length; i++) {
+                    get_list_items( data.children[i] );
+                }
+                list_items += '</ul></li>';
+            } else {
+                list_items += '<li>'+data.value.Name+'</li>';
+            }
+
+        };
+
+        var create_seperators = function() {
+            var sep = '';
+            for (var i = 0; i < seperator; i++) {
+                sep += '&#8212;';
+            }
+            return sep;
         };
 
     });
