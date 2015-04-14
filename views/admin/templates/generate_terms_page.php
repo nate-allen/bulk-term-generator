@@ -55,8 +55,14 @@
 
     <p>When you're ready to commit, click the button below to generate all the terms.</p>
 
-    <p class="submit">
-        <input type="submit" class="button button-primary" name="btg_select_taxonomy_submit" value="Generate Terms">
-    </p>
+    <form action="">
+
+        <p class="submit">
+            <input type="submit" class="button button-primary" name="btg_select_taxonomy_submit" value="Generate Terms">
+        </p>
+
+        <input type="hidden" name="terms_json" value="" id="terms-json">
+
+    </form>
 
 </div>
