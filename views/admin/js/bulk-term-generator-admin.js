@@ -37,14 +37,7 @@
             // Create object for each new term. Added to terms_array
             create_objects( terms_to_add, parent_term);
 
-            // Build the hierarchy
-            build_hierarchy();
-
-            // Update the select list
-            update_select_list();
-
-            // Update the term list
-            update_term_list();
+            reset_everything();
 
             // Clear the "terms to add" textarea
             $('#terms-to-add').val('');
@@ -52,10 +45,21 @@
             // Scroll to the top of the page
             $("html, body").animate({ scrollTop: 0 }, "slow");
 
-            // Reset everything
-            select_options = '';
-            seperator = 0;
-            list_items = '';
+            // Add JSON data to hidden field
+            $('#terms-json').val(JSON.stringify(hierarchy));
+
+        });
+
+        $('#term-list-container').on('click', 'a.delete', function(e){
+
+            var id = $(this).data('id');
+
+            for (var i = terms_array.length - 1; i >= 0; i--) {
+                if (terms_array[i].Id == id )
+                    terms_array.splice(i, 1);
+            }
+
+            reset_everything();
 
         });
 
@@ -174,13 +178,17 @@
         var get_list_items = function( data ) {
 
             if (data.children) {
-                list_items += '<li>'+data.value.Name+'<ul>';
+                list_items += '<li>'+data.value.Name;
+                list_items += (typeof data.value.Id != 'number') ? '<a href="#" class="delete" data-id="'+data.value.Id+'">X</a>' : '';
+                list_items += '<ul>';
                 for (var i = 0; i < data.children.length; i++) {
                     get_list_items( data.children[i] );
                 }
                 list_items += '</ul></li>';
             } else {
-                list_items += '<li>'+data.value.Name+'</li>';
+                list_items += '<li>'+data.value.Name;
+                list_items += (typeof data.value.Id != 'number') ? '<a href="#" class="delete" data-id="'+data.value.Id+'">X</a>' : '';
+                list_items += '</li>';
             }
 
         };
@@ -191,6 +199,22 @@
                 sep += '&#8212;';
             }
             return sep;
+        };
+
+        var reset_everything = function() {
+            // Build the hierarchy
+            build_hierarchy();
+
+            // Update the select list
+            update_select_list();
+
+            // Update the term list
+            update_term_list();
+
+            // Reset everything
+            select_options = '';
+            seperator = 0;
+            list_items = '';
         };
 
     });
