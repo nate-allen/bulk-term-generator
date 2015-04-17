@@ -7,6 +7,7 @@ class Bulk_Term_Generator_Template {
     private $template;
     private $select_options = '';
     private $list_items = '';
+    private $terms_array = array();
 
     /**
      * Constructor
@@ -224,6 +225,27 @@ class Bulk_Term_Generator_Template {
     }
 
     /**
+     * JSON List
+     *
+     * Returns a JSON encoded list of terms
+     *
+     * @param  string    $taxonomy    The taxonomy
+     * @return string                 JSON encoded string
+     */
+    public function json_list( $taxonomy ) {
+
+        // Get all of the terms for the given taxonomy
+        $terms = get_terms( $taxonomy, array( 'hide_empty' => false, 'parent' => 0 ) );
+
+        foreach ($terms as $term) {
+            $this->get_terms_array($taxonomy, $term);
+        }
+
+        return $this->terms_array;
+
+    }
+
+    /**
      * Get Seperators
      *
      * Will return seperators for each nested level the term is under
@@ -281,7 +303,7 @@ class Bulk_Term_Generator_Template {
      */
     private function get_list_items( $taxonomy, $term, $ul ){
 
-        $children = get_terms( $taxonomy, array('parent' => $term->term_id, 'hide_empty' => '0'));
+        $children = get_terms( $taxonomy, array('parent' => $term->term_id, 'hide_empty' => '0') );
 
         if (!empty($children)) {
 
@@ -296,6 +318,38 @@ class Bulk_Term_Generator_Template {
         } else {
 
             $this->list_items .= '<li>'.$term->name.'</li>';
+
+        }
+
+    }
+
+    /**
+     * Get Terms Array
+     *
+     * Get an array of term objects containing their Id, Name, and Parent
+     *
+     * @param     string    $taxonomy    The taxonomy you want to get terms for
+     * @return    array                  An array of term objects
+     */
+    private function get_terms_array( $taxonomy, $term ) {
+
+        // Get all of the terms for the given taxonomy
+        $children = get_terms( $taxonomy, array( 'hide_empty' => false, 'parent' => $term->term_id) );
+
+        $term_object = new stdClass;
+        $term_object->Id = $term->term_id;
+        $term_object->Name = $term->name;
+        $term_object->Parent = $term->parent;
+
+        array_push($this->terms_array, $term_object);
+
+        if (!empty($children)) {
+
+            foreach ($children as $child) {
+
+                $this->get_terms_array( $taxonomy, $child );
+
+            }
 
         }
 
