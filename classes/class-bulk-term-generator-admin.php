@@ -110,7 +110,7 @@ class Bulk_Term_Generator_Admin {
             $this->data['terms'] = $taxonomy_terms;
             $this->data['term_list'] = array( 'html_list' => array( 'taxonomy' => $taxonomy_slug, 'id' => 'term-list' ) );
             $this->data['term_select_list'] = array( 'term_select_list' => array( 'taxonomy' => $taxonomy_slug, 'id' => 'parent_term' ) );
-            $this->load_generate_terms_page();
+            $this->load_generate_terms_page($taxonomy->name);
 
         }
 
@@ -140,16 +140,24 @@ class Bulk_Term_Generator_Admin {
         wp_enqueue_style('bulk-term-generator-admin');
         $template_path = $this->settings_page_template;
         $template = new Bulk_Term_Generator_Template( $template_path, $this->data );
+
         echo $template->render();
 
     }
 
-    private function load_generate_terms_page() {
+    private function load_generate_terms_page( $taxonomy ) {
 
         wp_enqueue_style('bulk-term-generator-admin');
         wp_enqueue_script('bulk-term-generator-admin');
+
         $template_path = $this->generate_terms_page_template;
+
         $template = new Bulk_Term_Generator_Template( $template_path, $this->data );
+
+        $json_list = $template->json_list($taxonomy);
+
+        wp_localize_script( 'bulk-term-generator-admin', 'btg_terms_list',  $json_list);
+
         echo $template->render();
 
     }
