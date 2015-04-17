@@ -22,16 +22,17 @@
             var terms_to_add = $('#terms-to-add').val().split('\n'),
                 parent_term  = ( $('#parent_term').val() ) ? $('#parent_term').val() : 0;
 
-            // If the "Parents" select list exists, and this is the first time, get the terms
-            // and create an object for each one
-            if ( $('#parent_term').length > 0 && new_id === 1 ) {
-                $('#parent_term option').not( ":empty" ).each(function(){
+            // If this is the first time, get the existing terms
+            if ( new_id === 1 ) {
+                var existing_terms = window.btg_terms_list;
+
+                for (var i = 0; i < existing_terms.length; i++) {
                     terms_array.push({
-                        Id : parseInt($(this).val()),
-                        Name : $(this).data('name'),
-                        Parent : $(this).data('parent')
+                        Id : parseInt(existing_terms[i].Id),
+                        Name : existing_terms[i].Name,
+                        Parent : parseInt(existing_terms[i].Parent)
                     });
-                });
+                }
             }
 
             // Create object for each new term. Added to terms_array
@@ -43,7 +44,7 @@
             $('#terms-to-add').val('');
 
             // Scroll to the top of the page
-            $("html, body").animate({ scrollTop: 0 }, "slow");
+            $("html, body").animate({ scrollTop: 0 }, "medium");
 
             // Add JSON data to hidden field
             $('#terms-json').val(JSON.stringify(hierarchy));
