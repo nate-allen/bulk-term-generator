@@ -53,6 +53,8 @@
 
         $('#term-list-container').on('click', 'a.delete', function(e){
 
+            e.preventDefault();
+
             var id = $(this).data('id');
 
             for (var i = terms_array.length - 1; i >= 0; i--) {
