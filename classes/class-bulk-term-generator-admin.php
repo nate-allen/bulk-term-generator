@@ -62,9 +62,9 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_styles() {
 
-        wp_register_style( $this->plugin_name.'-admin', plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.css', array($this->plugin_name.'-jquery-ui-css'), $this->version, 'all' );
+        wp_register_style( $this->plugin_name.'-admin', plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.css', array($this->plugin_name.'-jquery-ui-css', 'font-awesome'), $this->version, 'all' );
         wp_register_style( $this->plugin_name.'-jquery-ui-css', '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css', array(), '1.11.3', 'all' );
-
+        wp_register_style( 'font-awesome', plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/font-awesome.min.css', array(), '4.3.0', 'all'  );
     }
 
     /**
@@ -205,7 +205,7 @@ class Bulk_Term_Generator_Admin {
 
     private function load_default_page() {
 
-        wp_enqueue_style('bulk-term-generator-admin');
+        wp_enqueue_style($this->plugin_name.'-admin');
         $template_path = $this->settings_page_template;
         $template = new Bulk_Term_Generator_Template( $template_path, $this->data );
 
@@ -215,7 +215,7 @@ class Bulk_Term_Generator_Admin {
 
     private function load_generate_terms_page( $taxonomy ) {
 
-        wp_enqueue_style(array($this->plugin_name.'-admin', $this->plugin_name.'-jquery-ui-css'));
+        wp_enqueue_style(array($this->plugin_name.'-admin', $this->plugin_name.'-jquery-ui-css', 'font-awesome'));
         wp_enqueue_script(array('jquery-ui-progressbar', 'jquery-ui-dialog', $this->plugin_name.'-admin'));
 
         $template_path = $this->generate_terms_page_template;

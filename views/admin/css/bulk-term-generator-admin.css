@@ -32,19 +32,13 @@
 }
 #btg-generate-terms #term-list .delete,
 #btg-generate-terms #term-list .edit {
-    width: 12px;
-    height: 12px;
-    display: inline-block;
     margin-left: 6px;
-    overflow: hidden;
-    text-indent: 100%;
-    white-space: nowrap;
 }
 #btg-generate-terms #term-list .delete {
-    background: url('images/delete.png') center center no-repeat transparent;
+    color: #ff0000;
 }
 #btg-generate-terms #term-list .edit {
-    background: url('images/edit.png') center center no-repeat transparent;
+    color: #000;
 }
 #btg-generate-terms #term-list-container {
     max-height: 400px;

@@ -293,7 +293,7 @@
 
             if (data.children) {
                 list_items += '<li>'+data.value.Name;
-                list_items += (typeof data.value.Id != 'number') ? '<a href="#" class="edit" data-id="'+data.value.Id+'">Edit</a><a href="#" class="delete" data-id="'+data.value.Id+'">X</a>' : '';
+                list_items += (typeof data.value.Id != 'number') ? '<a href="#" class="edit" data-id="'+data.value.Id+'"><i class="fa fa-pencil"></i></a><a href="#" class="delete" data-id="'+data.value.Id+'"><i class="fa fa-times"></i></a>' : '';
                 list_items += '<ul>';
                 for (var i = 0; i < data.children.length; i++) {
                     get_list_items( data.children[i] );
@@ -301,7 +301,7 @@
                 list_items += '</ul></li>';
             } else {
                 list_items += '<li>'+data.value.Name;
-                list_items += (typeof data.value.Id != 'number') ? '<a href="#" class="edit" data-id="'+data.value.Id+'">Edit</a><a href="#" class="delete" data-id="'+data.value.Id+'">X</a>' : '';
+                list_items += (typeof data.value.Id != 'number') ? '<a href="#" class="edit" data-id="'+data.value.Id+'"><i class="fa fa-pencil"></i></a><a href="#" class="delete" data-id="'+data.value.Id+'"><i class="fa fa-times"></i></a>' : '';
                 list_items += '</li>';
             }
 
