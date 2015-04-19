@@ -97,6 +97,7 @@ class Bulk_Term_Generator {
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_to_menu');
+        $this->loader->add_action( 'wp_ajax_btg_add_term', $plugin_admin, 'add_term');
 
     }
 
