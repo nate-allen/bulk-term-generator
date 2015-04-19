@@ -46,23 +46,41 @@
         </tbody>
     </table>
 
-    <p><span class="tip"><strong>Note:</strong> Terms won't be generated when you press the button below.<br>
-    You will have an opportunity to delete terms or start over before actually generating the terms in bulk.</span></p>
-
-    <p class="submit">
-        <input type="submit" class="button button-secondary" id="add-terms" value="Add Terms">
-    </p>
-
-    <p>When you're ready to commit, click the button below to generate all the terms.</p>
-
     <form action="">
 
         <p class="submit">
-            <input type="submit" class="button button-primary" name="btg_select_taxonomy_submit" value="Generate Terms">
+            <input type="submit" class="button button-secondary" id="add-terms" value="Add Terms to Queue">
+            <input type="submit" class="button button-primary" name="btg_select_taxonomy_submit" value="Generate Terms" id="btg-generate-terms-button" disabled>
         </p>
 
-        <input type="hidden" name="terms_json" value="" id="terms-json">
+        <?php wp_nonce_field( 'btg_add_term_to_'.$taxonomy_slug, 'btg_add_term_nonce' ); ?>
 
     </form>
+
+    <!-- Dialog boxes -->
+    <div id="btg-dialog-add" title="Generating Terms..." style="display:none;">
+        <div id="btg-progressbar"></div>
+        <p class="progress-status">Creating <em></em></p>
+    </div>
+    <div id="btg-dialog-edit" title="Edit Term" style="display:none;">
+        <p class="message" style="display:none;"></p>
+        <form>
+            <fieldset>
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
+                </div>
+                <div class="input-group">
+                    <label for="slug">Slug</label>
+                    <input type="text" name="slug" id="slug" value="" class="text ui-widget-content ui-corner-all">
+                </div>
+                <div class="input-group">
+                    <label for="password">Description</label>
+                    <input type="text" name="description" id="description" value="" class="text ui-widget-content ui-corner-all">
+                </div>
+                <input type="hidden" name="id" id="id" val="">
+            </fieldset>
+          </form>
+    </div>
 
 </div>
