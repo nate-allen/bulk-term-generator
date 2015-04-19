@@ -62,7 +62,8 @@ class Bulk_Term_Generator_Admin {
      */
     public function enqueue_styles() {
 
-        wp_register_style( $this->plugin_name.'-admin', plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.css', array(), $this->version, 'all' );
+        wp_register_style( $this->plugin_name.'-admin', plugin_dir_url( dirname(__FILE__) ) . 'views/admin/css/bulk-term-generator-admin.css', array($this->plugin_name.'-jquery-ui-css'), $this->version, 'all' );
+        wp_register_style( $this->plugin_name.'-jquery-ui-css', '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css', array(), '1.11.3', 'all' );
 
     }
 
@@ -110,6 +111,7 @@ class Bulk_Term_Generator_Admin {
             $this->data['terms'] = $taxonomy_terms;
             $this->data['term_list'] = array( 'html_list' => array( 'taxonomy' => $taxonomy_slug, 'id' => 'term-list' ) );
             $this->data['term_select_list'] = array( 'term_select_list' => array( 'taxonomy' => $taxonomy_slug, 'id' => 'parent_term' ) );
+
             $this->load_generate_terms_page($taxonomy->name);
 
         }
@@ -135,6 +137,72 @@ class Bulk_Term_Generator_Admin {
 
     }
 
+    public function add_term() {
+
+        $term_name = $_POST['term_name'];
+        $taxonomy = $_POST['taxonomy'];
+        $parent = $_POST['parent'];
+        $slug = $_POST['slug'];
+        $desc = $_POST['desc'];
+        $data = new stdClass;
+
+        // Check that the submitted nonce is one that was generated earlier.
+        // If not, return an error message
+        if ( !wp_verify_nonce( $_POST['_ajax_nonce'] , 'btg_add_term_to_'.$taxonomy) ){
+            $data->success = false;
+            $data->error = 'Security check failed.';
+            echo json_encode($data);
+            wp_die();
+        }
+
+        $args = array();
+
+        // Build the optional arguments
+        if ( isset($parent) && $parent != 0 ){
+            $args['parent'] = intval($parent);
+        }
+        if ( isset($slug) && $slug != '' ){
+            $args['slug'] = $slug;
+        }
+        if ( isset($desc) && $desc != '' ){
+            $args['description'] = $desc;
+        }
+
+        $term_object = wp_insert_term( $term_name, $taxonomy, $args );
+
+        if ( is_wp_error( $term_object ) ) {
+
+            $data->success = false;
+            $data->error = $term_object->get_error_code();
+
+            // If the term exists, get its ID and parent
+            if ( $term_object->get_error_code() == 'term_exists' ) {
+                $existing_term = term_exists( $term_name, $taxonomy );
+                $data->new_id = $existing_term['term_id'];
+
+                $term_info = get_term_by('id', $existing_term['term_id'], $taxonomy);
+                $data->parent_id = $term_info->parent;
+            }
+
+        } else {
+
+            $data->success = true;
+            $data->new_id = $term_object['term_id'];
+            $data->parent_id = intval($parent);
+
+        }
+
+        $data->new_nonce = wp_create_nonce( 'btg_add_term_to_'.$taxonomy);
+
+        echo json_encode($data);
+        wp_die();
+
+    }
+
+    /**
+     * Private Functions
+     */
+
     private function load_default_page() {
 
         wp_enqueue_style('bulk-term-generator-admin');
@@ -147,8 +215,8 @@ class Bulk_Term_Generator_Admin {
 
     private function load_generate_terms_page( $taxonomy ) {
 
-        wp_enqueue_style('bulk-term-generator-admin');
-        wp_enqueue_script('bulk-term-generator-admin');
+        wp_enqueue_style(array($this->plugin_name.'-admin', $this->plugin_name.'-jquery-ui-css'));
+        wp_enqueue_script(array('jquery-ui-progressbar', 'jquery-ui-dialog', $this->plugin_name.'-admin'));
 
         $template_path = $this->generate_terms_page_template;
 
@@ -156,7 +224,15 @@ class Bulk_Term_Generator_Admin {
 
         $json_list = $template->json_list($taxonomy);
 
-        wp_localize_script( 'bulk-term-generator-admin', 'btg_terms_list',  $json_list);
+        wp_localize_script(
+            'bulk-term-generator-admin',
+            'btg_object',
+            array(
+                'btg_terms_list' => $json_list,
+                'admin_url' => admin_url( 'admin-ajax.php' ),
+                'taxonomy' => $taxonomy
+            )
+        );
 
         echo $template->render();
 
