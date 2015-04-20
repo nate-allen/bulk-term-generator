@@ -97,6 +97,14 @@ class Bulk_Term_Generator_Admin {
 
         }
 
+        if ( isset( $_POST['action'] ) && $_POST['action'] == 'taxonomy_selected' && empty( $_POST['chosen_taxonomy'] ) ){
+
+            $this->data['error'] = 'Please choose a taxonomy';
+            $this->data['taxonomy_select_list'] = array( 'taxonomy_select_list' => array( 'id' => 'chosen_taxonomy' ) );
+            $this->load_default_page();
+
+        }
+
         // If the taxonomy is in the URL parameter
         if ( isset($_GET['taxonomy']) ) {
 
@@ -116,22 +124,14 @@ class Bulk_Term_Generator_Admin {
 
         }
 
+    }
+
+    public function taxonomy_select() {
+
         // If the user submitted the "Choose a Taxonomy" form
-        if ( isset( $_POST['action'] ) && $_POST['action'] == 'taxonomy_selected' ) {
+        if ( isset( $_POST['action'] ) && $_POST['action'] == 'taxonomy_selected' && !empty( $_POST['chosen_taxonomy'] ) ) {
 
-            if ( empty( $_POST['chosen_taxonomy'] ) ){
-
-                $this->data['error'] = 'Please choose a taxonomy';
-                $this->data['taxonomy_select_list'] = array( 'taxonomy_select_list' => array( 'id' => 'chosen_taxonomy' ) );
-                $this->load_default_page();
-
-            }
-            // If the user did choose a taxonomy, add it to the URL parameter
-            else {
-
-                wp_redirect( add_query_arg( 'taxonomy', $_POST['chosen_taxonomy'] ) );exit;
-
-            }
+            wp_redirect( add_query_arg( 'taxonomy', $_POST['chosen_taxonomy'] ) );exit;
 
         }
 
