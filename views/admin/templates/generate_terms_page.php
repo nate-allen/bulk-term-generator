@@ -59,8 +59,13 @@
 
     <!-- Dialog boxes -->
     <div id="btg-dialog-add" title="Generating Terms..." style="display:none;">
-        <div id="btg-progressbar"></div>
-        <p class="progress-status">Creating <em></em></p>
+        <div class="in-progress">
+            <div id="btg-progressbar"></div>
+            <p class="progress-status">Creating <em></em></p>
+        </div>
+        <div class="completed" style="display:none;">
+            <p><strong>Done!</strong> <span class="num-term-created">0 terms have</span> been created.</p>
+        </div>
     </div>
     <div id="btg-dialog-edit" title="Edit Term" style="display:none;">
         <p class="message" style="display:none;"></p>
