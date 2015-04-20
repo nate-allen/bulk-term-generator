@@ -75,7 +75,8 @@
     border-color: #4597d5;
 }
 .btg-dialog-add.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset,
-.btg-dialog-edit.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset  {
+.btg-dialog-edit.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset,
+.btg-dialog-complete.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset  {
     float: none;
  }
 .btg-dialog-add .ui-dialog-titlebar-close,
@@ -83,7 +84,8 @@
     visibility: hidden;
 }
 .btg-dialog-add .ui-dialog-titlebar,
-.btg-dialog-edit .ui-dialog-titlebar {
+.btg-dialog-edit .ui-dialog-titlebar,
+.btg-dialog-complete .ui-dialog-titlebar{
     color: #eaf5f7;
     border-color: #4597d5;
     background: #74b9d6; /* Old browsers */
@@ -115,19 +117,9 @@
 .ui-widget-overlay {
     background: #000;
 }
-/*Progress Bar*/
-#btg-progressbar {
-    background: #e5e1e1;
-    margin-top: 1em;
-    border-color: #a8a8a8;
+.btg-dialog-complete .completed > p {
+    font-size: 1em;
 }
-#btg-progressbar > div {
-  background: #5bb35c;
-}
-#btg-dialog-add .progress-status {
-  margin: 0;
-}
-/* Edit Dialog Box*/
 .btg-dialog-edit .input-group {
     margin: 1em 0;
 }
@@ -141,7 +133,8 @@
 .btg-dialog-edit .input-group input {
     width: 100%;
 }
-.btg-dialog-edit .ui-widget-content .ui-state-default {
+.btg-dialog-edit .ui-widget-content .ui-state-default,
+.btg-dialog-complete .ui-widget-content .ui-state-default {
     color: #fff;
     border-color: #52a452;
     background: #61c261; /* Old browsers */
@@ -155,4 +148,16 @@
     background: linear-gradient(to bottom,  #61c261 0%,#61c261 50%,#51a451 52%,#51a451 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#61c261', endColorstr='#51a451',GradientType=0 ); /* IE6-8 */
     outline-width: 0px !important;
+}
+/*Progress Bar*/
+#btg-progressbar {
+    background: #e5e1e1;
+    margin-top: 1em;
+    border-color: #a8a8a8;
+}
+#btg-progressbar > div {
+  background: #5bb35c;
+}
+#btg-dialog-add .progress-status {
+  margin: 0;
 }
