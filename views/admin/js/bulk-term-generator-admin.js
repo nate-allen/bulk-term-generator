@@ -4,16 +4,19 @@
     // The page is ready
     $(function() {
 
-        var terms_array      = [], // An array of each term and its info.
-            terms_array_temp = [], // While terms are sent via ajax, they're held here temporarily.
-            hierarchy        = [], // A hierachal version of the terms_array.
-            select_options   = '', // Select options are stored here temporarily.
-            list_items       = '', // Unordered list items stored here temporarily.
-            seperator        = 0,  // Temporary number for keeping track of nesting count.
-            num_terms_to_add = 0,  // Number of terms waiting to be added. Used for progress meter.
-            num_terms_added  = 0,  // Number of terms that have been added. Used for preogress meter.
-            new_id           = 1,  // A temp id for new terms.
-            new_ids          = {}; // When a temp ID becomes a real one, store the info here so it can be looked up.
+        var terms_array       = [], // An array of each term and its info.
+            terms_array_temp  = [], // While terms are sent via ajax, they're held here temporarily.
+            hierarchy         = [], // A hierachal version of the terms_array.
+            select_options    = '', // Select options are stored here temporarily.
+            list_items        = '', // Unordered list items stored here temporarily.
+            seperator         = 0,  // Temporary number for keeping track of nesting count.
+            num_terms_to_add  = 0,  // Number of terms waiting to be added. Used for progress meter and stats.
+            num_terms_added   = 0,  // Number of terms that have been added. Used for preogress meter and stats.
+            num_terms_skipped = 0,  // Number of terms skipped (duplicates). Used for stats.
+            num_errors        = 0,  // Number of errors while adding terms. Used for stats.
+            new_id            = 1,  // A temp id for new terms.
+            new_ids           = {}, // When a temp ID becomes a real one, info stored here so it can be looked up.
+            job_active        = false; // Whether a job is currently active or not
 
 
         $('#add-terms').on('click', function(e){
@@ -61,6 +64,7 @@
             for (var i = terms_array.length - 1; i >= 0; i--) {
                 if (terms_array[i].Id == id ){
                     terms_array.splice(i, 1);
+                    num_terms_to_add--;
                     break;
                 }
             }
@@ -136,6 +140,8 @@
                 $('#btg-dialog-add').dialog( "option", "width", 600 );
             }
 
+            reset_dialog_box();
+
             $('#btg-dialog-add').dialog('open');
 
             cycle_terms( terms_array );
@@ -146,11 +152,7 @@
 
             // If there are no more terms, reset the terms_array
             if ( terms.length === 0 ){
-                // Reset number of terms to add and terms added number
-                num_terms_to_add = 0;
-                num_terms_added  = 0;
-                // Reset everything else
-                reset_everything();
+                job_finished();
                 return;
             }
 
@@ -390,6 +392,36 @@
             $(self).dialog('close');
         };
 
+        var job_finished = function() {
+
+            job_active = false;
+
+            // Display "Completed" message in dialog box
+            $('.btg-dialog-add .in-progress').hide();
+            $('.btg-dialog-add .completed').show();
+            var status_text = (num_terms_added === 1) ? num_terms_added+' term has' : num_terms_added+' terms have';
+            $('.btg-dialog-add .num-term-created').text(status_text);
+
+            $( "#btg-dialog-add" ).dialog( "option", {
+                    title: "Finished adding terms!",
+                    buttons: [{
+                        text: "Close",
+                        click: function() {
+                            $(this).dialog('close');
+                        }
+                    }],
+                    dialogClass: 'btg-dialog-complete'
+                }
+            );
+
+            // Reset 'terms to add' and 'terms added' numbers
+            num_terms_to_add = 0;
+            num_terms_added  = 0;
+            // Reset everything else
+            reset_everything();
+
+        };
+
         var reset_everything = function() {
 
             // Combine terms_array and terms_array_temp
@@ -420,17 +452,33 @@
 
         };
 
+        var reset_dialog_box = function() {
+
+            // Reset the progress bar
+            $('#btg-progressbar').progressbar({value: 0});
+
+            // Reset the dialog box
+            $('#btg-dialog-add').dialog('option', {
+                dialogClass: 'btg-dialog-add',
+                title: "Generating Terms...",
+                buttons: [{
+                    text: "Stop",
+                    click: function() {
+                        $(this).dialog('close');
+                    }
+                }]
+            });
+            $('.btg-dialog-add .completed').hide();
+            $('.btg-dialog-add .in-progress').show();
+
+        };
+
         // If the user tries to leave but has terms in their queue, alert them
         $(window).bind('beforeunload', function(){
             if (num_terms_to_add > 0){
                 return "Your terms haven't been created yet! \n\rClick the 'Generate Terms' button at the bottom of the page before you leave.";
             }
         });
-
-    });
-
-    // The window has loaded
-    $( window ).load(function() {
 
     });
 
