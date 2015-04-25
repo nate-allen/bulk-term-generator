@@ -108,7 +108,7 @@
 
                 <h3>Support</h3>
 
-                <p>If need help, check out the support page for the plugin. I will do my best to answer questions or patch bugs. Please be patient, this is a free plugin and I have a full-time job. :)</p>
+                <p>If need help, check out the support page for the plugin. I will do my best to answer questions or patch bugs. Please be patient; this is a free plugin and I have a full-time job. :)</p>
 
             </div>
 
