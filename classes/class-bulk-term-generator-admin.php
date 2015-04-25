@@ -131,7 +131,7 @@ class Bulk_Term_Generator_Admin {
         // If the user submitted the "Choose a Taxonomy" form
         if ( isset( $_POST['action'] ) && $_POST['action'] == 'taxonomy_selected' && !empty( $_POST['chosen_taxonomy'] ) ) {
 
-            wp_redirect( add_query_arg( 'taxonomy', $_POST['chosen_taxonomy'] ) );exit;
+            wp_redirect( add_query_arg( array('taxonomy' => $_POST['chosen_taxonomy']), esc_url_raw($_SERVER['REQUEST_URI']) ) );exit;
 
         }
 
