@@ -7,6 +7,33 @@
 }
 
 /**
+ * Layout
+ */
+#btg-generate-terms .btg-main {
+    width: 68.5%;
+    float: left;
+    overflow: hidden;
+    margin: 0 1.5% 0 0;
+}
+#btg-generate-terms .btg-side-container {
+    width: 28.5%;
+    float: right;
+    overflow: hidden;
+    margin: 0 0 0 1.5%;
+}
+#btg-generate-terms .btg-side-container .btg-side {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #c4c4c4;
+    background-color: #dbd5d5;
+    padding: 1em;
+}
+#btg-generate-terms .btg-side-container .btg-side p {
+  font-size: 1.1em;
+}
+
+/**
  * Page: Generate Terms
  */
 #btg-generate-terms #terms-to-add {
@@ -43,7 +70,7 @@
 #btg-generate-terms #term-list-container {
     max-height: 400px;
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     border: 1px solid #aeaeae;
 }
 #btg-generate-terms #term-list-container li {
@@ -160,4 +187,63 @@
 }
 #btg-dialog-add .progress-status {
   margin: 0;
+}
+
+/**
+ * Media Queries
+ */
+@media only screen and (max-width: 1260px) {
+
+    #btg-generate-terms .btg-main {
+        margin-bottom: 1em;
+    }
+    #btg-generate-terms .btg-main,
+    #btg-generate-terms .btg-side-container {
+        width: auto;
+        float: none;
+        overflow: hidden;
+        margin: auto;
+    }
+    #btg-generate-terms .btg-side-container .btg-side {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        border: 0;
+        background-color: transparent;
+        padding: 0;
+    }
+    #btg-generate-terms .btg-side-container .btg-side .btg-about,
+    #btg-generate-terms .btg-side-container .btg-side .btg-support,
+    #btg-generate-terms .btg-side-container .btg-side .btg-feedback {
+        box-sizing: border-box;
+        float: left;
+        overflow: hidden;
+        width: 31%;
+        margin: 0 1.5%;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        border: 1px solid #c4c4c4;
+        background-color: #dbd5d5;
+        padding: 1em;
+    }
+    #btg-generate-terms .btg-side-container .btg-side > div:first-child {
+        margin-left: 0;
+    }
+    #btg-generate-terms .btg-side-container .btg-side > div:last-child {
+        margin-right: 0;
+    }
+
+}
+@media only screen and (max-width: 782px) {
+    #btg-generate-terms .btg-side-container .btg-side .btg-about,
+    #btg-generate-terms .btg-side-container .btg-side .btg-support,
+    #btg-generate-terms .btg-side-container .btg-side .btg-feedback {
+        float: none;
+        overflow: hidden;
+        width: 100%;
+        margin: auto;
+        margin-bottom: 1em;
+        padding: 1em;
+    }
 }
