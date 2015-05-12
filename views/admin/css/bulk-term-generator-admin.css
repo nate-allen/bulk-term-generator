@@ -36,7 +36,7 @@
 /**
  * Page: Generate Terms
  */
-#btg-generate-terms #terms-to-add {
+#btg-generate-terms .btg-terms-to-add {
     width: 100%;
     max-width: 800px;
 }
@@ -50,7 +50,7 @@
     font-size: 1.2em;
     line-height: 1.5em;
 }
-#term-list-container p {
+.btg-term-list-container p {
     font-size: 1.2em;
     margin-left: 2em;
 }
@@ -67,13 +67,13 @@
 #btg-generate-terms #term-list .edit {
     color: #000;
 }
-#btg-generate-terms #term-list-container {
+#btg-generate-terms .btg-term-list-container {
     max-height: 400px;
     overflow: hidden;
     overflow-y: auto;
     border: 1px solid #aeaeae;
 }
-#btg-generate-terms #term-list-container li {
+#btg-generate-terms .btg-term-list-container li {
     margin: 0 0 0 2em;
 }
 #btg-generate-terms #parent_term {
@@ -91,7 +91,7 @@
     display: inline-block;
     padding: 10px;
 }
-#btg-generate-terms #add-terms {
+#btg-generate-terms .btg-add-terms {
     margin-right: 1em;
 }
 
@@ -177,12 +177,12 @@
     outline-width: 0px !important;
 }
 /*Progress Bar*/
-#btg-progressbar {
+.btg-progressbar {
     background: #e5e1e1;
     margin-top: 1em;
     border-color: #a8a8a8;
 }
-#btg-progressbar > div {
+.btg-progressbar > div {
   background: #5bb35c;
 }
 #btg-dialog-add .progress-status {

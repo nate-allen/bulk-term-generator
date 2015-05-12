@@ -14,7 +14,7 @@
 
         <h3>Your Terms:</h3>
 
-        <div id="term-list-container">
+        <div class="btg-term-list-container">
             <?php if ( !empty($terms) ) : ?>
                 <?= $term_list ?>
             <?php else : ?>
@@ -31,7 +31,7 @@
         <p><span class="tip"><strong>Optional:</strong> You can specify the "slug" and "description" for each term by seperating them with commas.<br>
         <span class="example">(ie: United States, united_states, Population is 317 Million)</span></span></p>
 
-        <textarea id="terms-to-add" rows="10" class="example"></textarea>
+        <textarea class="btg-terms-to-add" rows="10" class="example"></textarea>
 
         <table class="form-table">
             <tbody>
@@ -51,8 +51,8 @@
         <form action="">
 
             <p class="submit">
-                <input type="submit" class="button button-secondary" id="add-terms" value="Add Terms to Queue">
-                <input type="submit" class="button button-primary" name="btg_select_taxonomy_submit" value="Generate Terms" id="btg-generate-terms-button" disabled>
+                <input type="submit" class="button button-secondary btg-add-terms" value="Add Terms to Queue">
+                <input type="submit" class="button button-primary btg-generate-terms-button" name="btg_select_taxonomy_submit" value="Generate Terms" disabled>
             </p>
 
             <?php wp_nonce_field( 'btg_add_term_to_'.$taxonomy_slug, 'btg_add_term_nonce' ); ?>
@@ -62,7 +62,7 @@
         <!-- Dialog boxes -->
         <div id="btg-dialog-add" title="Generating Terms..." style="display:none;">
             <div class="in-progress">
-                <div id="btg-progressbar"></div>
+                <div class="btg-progressbar"></div>
                 <p class="progress-status">Creating <em></em></p>
             </div>
             <div class="completed" style="display:none;">
