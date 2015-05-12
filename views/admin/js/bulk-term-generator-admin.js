@@ -100,12 +100,12 @@
                 for (var i = self.internal.terms.length - 1; i >= 0; i--) {
                     if (self.internal.terms[i].Id == id ){
                         self.internal.terms.splice(i, 1);
-                        internal.stats.termsToAdd--;
+                        self.stats.termsToAdd--;
                         break;
                     }
                 }
 
-                self._reset();
+                self._reset(['hierarchy', 'select list', 'terms list', 'submit']);
             });
 
             // Edit term
@@ -218,21 +218,20 @@
         };
 
         self.createObjects = function( terms, parent ){
-            console.log('createObjects run');
             terms = self._processTerms( terms );
-            console.log('terms: '+terms);
+
             for (var i = 0; i < terms.length; i++) {
-                console.log('createObjects loop');
+
                 if ( terms[i][0] === '')
                     continue;
 
                 var key = 'new_'+self.internal.id++,
                     term = {
                         Id: key,
-                        Name: self.internal.terms[i][0],
+                        Name: terms[i][0],
                         Parent: parent,
-                        Slug: self.internal.terms[i][1],
-                        Desc: self.internal.terms[i][2]
+                        Slug: terms[i][1],
+                        Desc: terms[i][2]
                     };
 
                 self.internal.terms.push(term);
@@ -257,12 +256,12 @@
          */
 
         self._processTerms = function( terms ){
-            console.log('processTerms run');
+
             var processedTerms = [];
 
             // Seperate terms by comma, and trim the white space
             for (var i = 0; i < terms.length; i++) {
-                console.log('processTerms loop');
+
                 processedTerms.push($.map(terms[i].split(','), $.trim));
             }
 
@@ -291,16 +290,11 @@
         };
 
         self._reset = function(option){
-
-            console.log('reset run');
-
             option = option || false;
 
             if ( option && !$.isArray(option)) {
                 option = $.makeArray(option);
             }
-
-            console.log('option='+option);
 
             if ( $.inArray('queue', option) > -1 || !option ) {
                 self.$el.find(self.options.termsField).val('');
