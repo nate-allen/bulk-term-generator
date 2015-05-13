@@ -59,35 +59,8 @@
 
         </form>
 
-        <!-- Dialog boxes -->
-        <div id="btg-dialog-add" title="Generating Terms..." style="display:none;">
-            <div class="in-progress">
-                <div class="btg-progressbar"></div>
-                <p class="progress-status">Creating <em></em></p>
-            </div>
-            <div class="completed" style="display:none;">
-                <p><strong>Done!</strong> <span class="num-term-created">0 terms have</span> been created.</p>
-            </div>
-        </div>
-        <div id="btg-dialog-edit" title="Edit Term" style="display:none;">
-            <p class="message" style="display:none;"></p>
-            <form>
-                <fieldset>
-                    <div class="input-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
-                    </div>
-                    <div class="input-group">
-                        <label for="slug">Slug</label>
-                        <input type="text" name="slug" id="slug" value="" class="text ui-widget-content ui-corner-all">
-                    </div>
-                    <div class="input-group">
-                        <label for="password">Description</label>
-                        <input type="text" name="description" id="description" value="" class="text ui-widget-content ui-corner-all">
-                    </div>
-                    <input type="hidden" name="id" id="id" val="">
-                </fieldset>
-              </form>
+        <!-- Dialog box -->
+        <div id="btg-dialog" style="display:none;">
         </div>
 
     </div>
