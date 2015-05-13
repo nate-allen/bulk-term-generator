@@ -230,6 +230,7 @@ class Bulk_Term_Generator_Admin {
             array(
                 'btg_terms_list' => $json_list,
                 'admin_url' => admin_url( 'admin-ajax.php' ),
+                'plugin_dir' => plugins_url('', dirname(__FILE__)),
                 'taxonomy' => $taxonomy
             )
         );
