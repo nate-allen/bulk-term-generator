@@ -22,10 +22,11 @@
             generateTermsButton: '.btg-generate-terms-button',
             parentSelect: '#parent_term',
             termListContainer: '.btg-term-list-container',
-            dialogEdit: '.btg-dialog-edit',
-            dialogAdd: '#btg-dialog-add',
+            dialog: '#btg-dialog',
             progressBar: '.btg-progressbar',
-            nonce: '#btg_add_term_nonce'
+            nonce: '#btg_add_term_nonce',
+            addTemplate: btg_object.plugin_dir+'/views/admin/templates/dialog_add.html',
+            editTemplate: btg_object.plugin_dir+'/views/admin/templates/dialog_edit.html'
         };
 
         // Internal info
@@ -50,10 +51,24 @@
             errors: 0,
         };
 
+        // Templates
+        self.templates = {
+            add: '',
+            edit: ''
+        };
+
         self.init = function () {
 
             // Combine defaults with options
             self.options = $.extend({}, self.defaultOptions, options);
+
+            // Get templates and assign them to the template variables
+            $.get(self.options.addTemplate, function(template){
+                self.templates.add = template.format("Title here", "Complete!");
+            });
+            $.get(self.options.editTemplate, function(template){
+                self.templates.edit = template
+            });
 
             // Get all the existing terms for this taxonomy
             self.getExistingTerms();
@@ -63,6 +78,13 @@
                 if (self.stats.termsToAdd > 0){
                     return "Your terms haven't been created yet! \n\rClick the 'Generate Terms' button at the bottom of the page before you leave.";
                 }
+            });
+
+            // Setup the dialog box
+            $( '#btg-dialog' ).dialog({
+                autoOpen: false,
+                closeOnEscape: false,
+                modal: true,
             });
 
             /**
@@ -116,15 +138,15 @@
 
                 for (var i = self.internal.terms.length - 1; i >= 0; i--) {
                     if (self.internal.terms[i].Id == id ) {
-                        self.$el.find(self.options.dialogEdit+' #name').val(self.internal.terms[i].Name);
-                        self.$el.find(self.options.dialogEdit+' #slug').val(self.internal.terms[i].Slug);
-                        self.$el.find(self.options.dialogEdit+' #description').val(self.internal.terms[i].Desc);
-                        self.$el.find(self.options.dialogEdit+' #id').val(id);
+                        self.$el.find(self.options.dialog+' #name').val(self.internal.terms[i].Name);
+                        self.$el.find(self.options.dialog+' #slug').val(self.internal.terms[i].Slug);
+                        self.$el.find(self.options.dialog+' #description').val(self.internal.terms[i].Desc);
+                        self.$el.find(self.options.dialog+' #id').val(id);
                         break;
                     }
                 }
 
-                self.$el.find(self.options.dialogEdit).dialog('open');
+                self.$el.find(self.options.dialog).dialog('open');
             });
 
             // Generate Terms button
@@ -138,12 +160,14 @@
 
                 // If we're on a larger screen, cap the dialog width at 600px
                 if ( window_width >= 960){
-                    self.$el.find(self.options.dialogAdd).dialog( "option", "width", 600 );
+                    self.$el.find(self.options.dialog).dialog( "option", "width", 600 );
+                } else {
+                    self.$el.find(self.options.dialog).dialog( "option", "width", '80%' );
                 }
 
                 self._reset(['dialog']);
 
-                self.$el.find(self.options.dialogAdd).dialog('open');
+                self.$el.find(self.options.dialog).dialog('open');
 
                 self._processNextTerm();
 
@@ -406,12 +430,13 @@
             self.internal.seperators = 0;
         };
 
+        // TODO: Remove this
         self._resetDialog = function() {
             // Reset progress bar
             self.$el.find(self.options.progressBar).progressbar({value: 0});
 
             // Reset the dialog box
-            self.$el.find(self.options.dialogAdd).dialog('option', {
+            self.$el.find(self.options.dialog).dialog('option', {
                 dialogClass: 'btg-dialog-add',
                 title: "Generating Terms...",
                 buttons: [{
@@ -421,8 +446,8 @@
                     }
                 }]
             });
-            self.$el.find(self.options.dialogAdd+' .completed').hide();
-            self.$el.find(self.options.dialogAdd+' .in-progress').show();
+            self.$el.find(self.options.dialog+' .completed').hide();
+            self.$el.find(self.options.dialog+' .in-progress').show();
         };
 
         self._termsFieldIsEmpty = function(){
@@ -496,6 +521,19 @@
 
             self._reset();
         };
+
+        // Add a "format" function to the String prototype
+        if (!String.prototype.format) {
+          String.prototype.format = function() {
+            var args = arguments;
+            return this.replace(/{(\d+)}/g, function(match, number) {
+              return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+              ;
+            });
+          };
+        }
 
         /*********************/
 
