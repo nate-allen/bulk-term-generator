@@ -231,7 +231,28 @@ class Bulk_Term_Generator_Admin {
                 'btg_terms_list' => $json_list,
                 'admin_url' => admin_url( 'admin-ajax.php' ),
                 'plugin_dir' => plugins_url('', dirname(__FILE__)),
-                'taxonomy' => $taxonomy
+                'taxonomy' => $taxonomy,
+                'i18n' => array(
+                    'creating' => 'Creating',
+                    'done' => 'Done!',
+                    'name' => 'Name',
+                    'slug' => 'Slug',
+                    'description' => 'Description',
+                    'warning_line_1' => "Your terms haven't been created yet!",
+                    'warning_line_2' => "Click the 'Generate Terms' button at the bottom of the page before you leave.",
+                    'edit_term' => 'Edit Term',
+                    'save' => 'Save',
+                    'generating_terms' => 'Generating Terms...',
+                    'stop' => 'Stop',
+                    'pause' => 'Pause',
+                    'continue' => 'Continue',
+                    'no_terms_yet' => 'No terms yet. Add some below!',
+                    'term_added' => '{0} term has been added',
+                    'terms_added' => '{0} terms have been added',
+                    'finished_adding_terms' => 'Finished adding terms!',
+                    'close' => 'Close',
+
+                )
             )
         );
 
