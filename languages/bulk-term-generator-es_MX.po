@@ -1,11 +1,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2015-05-16 21:45-0500\n"
-"PO-Revision-Date: 2015-05-16 21:45-0500\n"
+"POT-Creation-Date: 2015-05-16 21:07-0500\n"
+"PO-Revision-Date: 2015-05-16 21:34-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,77 +12,85 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;esc_attr_e\n"
+"Language: es_MX\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../views/admin/templates/generate_terms_page.php:3
 #: ../views/admin/templates/settings_page_default.php:3
 msgid "Bulk Term Generator"
-msgstr ""
+msgstr "Bulk Term Generator"
 
 #: ../views/admin/templates/generate_terms_page.php:13
 #, php-format
 msgid "On this page you can add terms to the %s taxonomy in bulk."
 msgstr ""
+"En esta página usted puede añadir términos a la taxonomía de %s a granel."
 
 #: ../views/admin/templates/generate_terms_page.php:15
 msgid "Your Terms:"
-msgstr ""
+msgstr "Sus Términos:"
 
 #: ../views/admin/templates/generate_terms_page.php:21
 msgid "No terms yet. Add some below!"
-msgstr ""
+msgstr "No hay término. Agregue un poco de abajo!"
 
 #: ../views/admin/templates/generate_terms_page.php:25
 msgid "Add Terms"
-msgstr ""
+msgstr "Añadir Términos"
 
 #: ../views/admin/templates/generate_terms_page.php:28
 msgid "Enter each term below <span>on its own line</span>."
 msgstr ""
+"Escriba a continuación Cada término <span> en ictos propia línea </ span>."
 
 #: ../views/admin/templates/generate_terms_page.php:31
 msgid "Optional:"
-msgstr ""
+msgstr "Opcional:"
 
 #: ../views/admin/templates/generate_terms_page.php:31
 msgid ""
 "You can specify the \"slug\" and \"description\" for each term by seperating "
 "them with commas."
 msgstr ""
+"Puede especificar la \"babosa\" y \"descripción\" para cada término por "
+"seperating em con comas."
 
 #: ../views/admin/templates/generate_terms_page.php:32
 msgid "(ie: United States, united_states, Population is 317 Million)"
-msgstr ""
+msgstr "(Es decir: México, mexico, Población es de 122 millones)"
 
 #: ../views/admin/templates/generate_terms_page.php:39
 msgid "Parent"
-msgstr ""
+msgstr "Principal"
 
 #: ../views/admin/templates/generate_terms_page.php:44
 msgid "(Sorry, this taxonomy isn't hierarchical)"
-msgstr ""
+msgstr "(Lo siento, esta taxonomía no es jerárquica)"
 
 #: ../views/admin/templates/generate_terms_page.php:54
 msgid "Add Terms to Queue"
-msgstr ""
+msgstr "Añadir término a la cola"
 
 #: ../views/admin/templates/generate_terms_page.php:55
 msgid "Generate Terms"
-msgstr ""
+msgstr "Generar Términos"
 
 #: ../views/admin/templates/generate_terms_page.php:74
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: ../views/admin/templates/generate_terms_page.php:76
 msgid ""
 "<strong>Bulk Term Generator</strong> was developed by Nate Allen, Senior Web "
 "Developer at <a href=\"http://fireflypartners.com\">Firefly Partners</a>."
 msgstr ""
+"<strong>Bulk Term Generator</strong> fue desarrollada por Nate Allen, "
+"Tercera Web Developer en <a href=\"http://fireflypartners.com\">Firefly "
+"Partners</a>."
 
 #: ../views/admin/templates/generate_terms_page.php:82
 msgid "Support"
-msgstr ""
+msgstr "Apoyo"
 
 #: ../views/admin/templates/generate_terms_page.php:84
 msgid ""
@@ -91,10 +98,14 @@ msgid ""
 "to answer questions or patch bugs. Please be patient; this is a free plugin "
 "and I have a full-time job. :)"
 msgstr ""
+"Si necesita ayuda, echa un vistazo a la página de soporte para el plugin. "
+"Haré todo lo posible para responder a los problemas o errores de conexión. "
+"Por favor sea paciente; este es un plugin gratuito y tengo un trabajo de "
+"tiempo completo. :)"
 
 #: ../views/admin/templates/generate_terms_page.php:90
 msgid "Feedback"
-msgstr ""
+msgstr "Realimentación"
 
 #: ../views/admin/templates/generate_terms_page.php:92
 msgid ""
@@ -103,15 +114,18 @@ msgid ""
 "github.com/nate-allen/bulk-term-generator\">contribute code to the Github "
 "repository</a>!"
 msgstr ""
+"¿Tiene una idea para una mejora? <a href=\"mailto:email@ncallen.com"
+"\">Envíeme por correo electrónico</a> y voy a ver qué puedo hacer. O mejor "
+"aún, código contribuer a Github!"
 
 #: ../views/admin/templates/settings_page_default.php:11
 msgid "First, choose a taxonomy you'd like to add terms to:"
-msgstr ""
+msgstr "En primer lugar, elegir una taxonomía que desea añadir términos a:"
 
 #: ../views/admin/templates/settings_page_default.php:19
 msgid "Taxonomy"
-msgstr ""
+msgstr "Taxonomía"
 
 #: ../views/admin/templates/settings_page_default.php:29
 msgid "Select Taxonomy"
-msgstr ""
+msgstr "Seleccione Taxonomía"
