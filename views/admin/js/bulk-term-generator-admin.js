@@ -32,7 +32,7 @@
         // Internal info
         self.internal = {
             paused: false, // Is a job currently paused?
-            active: false, // Is a job currently running? (job can be active AND paused...)
+            active: false, // Is a job currently running? (jobs can be active AND paused)
             terms: [], // An array of each term and its info.
             cache: [], // Temporary storage while terms are sent via ajax
             hierarchy: [], // Object containing the hieracrchy of terms
@@ -64,10 +64,10 @@
 
             // Get templates and assign them to the template variables
             $.get(self.options.addTemplate, function(template){
-                self.templates.add = template.format("Title here", "Complete!");
+                self.templates.add = template.format(btg_object.i18n.creating+' ', btg_object.i18n.done);
             });
             $.get(self.options.editTemplate, function(template){
-                self.templates.edit = template
+                self.templates.edit = template.format(btg_object.i18n.name, btg_object.i18n.slug, btg_object.i18n.description);
             });
 
             // Get all the existing terms for this taxonomy
@@ -76,12 +76,12 @@
             // If the user tries to leave but has terms in their queue, alert them
             $(window).bind('beforeunload', function(){
                 if (self.stats.termsToAdd > 0){
-                    return "Your terms haven't been created yet! \n\rClick the 'Generate Terms' button at the bottom of the page before you leave.";
+                    return btg_object.i18n.warning_line_1+"\n\r"+btg_object.i18n.warning_line_2;
                 }
             });
 
             // Setup the dialog box
-            $( '#btg-dialog' ).dialog({
+            $(self.options.dialog).dialog({
                 autoOpen: false,
                 closeOnEscape: false,
                 modal: true,
@@ -91,7 +91,7 @@
              * Event Handlers
              */
 
-            // Add Terms to Queu button
+            // Add Terms to Queu button clicked
             self.$el.find(self.options.addTermsBtn).on('click', function(e){
                 e.preventDefault();
 
@@ -103,17 +103,17 @@
                 var terms_to_add = self.$el.find(self.options.termsField).val().split('\n'),
                     parent_term  = self.$el.find(self.options.parentSelect).val();
 
-                    parent_term  = (parent_term) ? parent_term : 0;
+                parent_term  = (parent_term) ? parent_term : 0;
 
                 self.createObjects( terms_to_add, parent_term);
 
-                self._reset(['queue','merge', 'hierarchy', 'select list', 'terms list', 'submit', 'internals']);
+                self._reset(['queue', 'merge', 'hierarchy', 'select list', 'terms list', 'submit', 'internals']);
 
                 // Scroll to the top of the page
                 $("html, body").animate({ scrollTop: 0 }, "medium");
             });
 
-            // Delete term
+            // Delete term icon clicked
             self.$el.find(self.options.termListContainer).on('click', 'a.delete', function(e){
                 e.preventDefault();
 
@@ -127,47 +127,118 @@
                     }
                 }
 
-                self._reset(['hierarchy', 'select list', 'terms list', 'submit']);
+                self._reset(['hierarchy', 'select list', 'terms list', 'submit', 'internals']);
             });
 
-            // Edit term
+            // Edit term button clicked
             self.$el.find(self.options.termListContainer).on('click', 'a.edit', function(e){
                 e.preventDefault();
 
                 var id = $(this).data('id');
 
+                $(self.options.dialog).html(self.templates.edit);
+
+                $(self.options.dialog).dialog({
+                    dialogClass: 'btg-dialog-edit',
+                    title: btg_object.i18n.edit_term,
+                    resizable: true,
+                    width: 'auto',
+                    buttons: [
+                        {
+                            text: btg_object.i18n.save,
+                            click: function(){
+                                var id   = $(this).find('#id').val(),
+                                    name = $(this).find('#name').val(),
+                                    slug = $(this).find('#slug').val(),
+                                    desc = $(this).find('#description').val();
+
+                                for (var i = self.internal.terms.length - 1; i >= 0; i--) {
+                                    if (self.internal.terms[i].Id == id ) {
+                                        self.internal.terms[i].Name = name;
+                                        self.internal.terms[i].Slug = slug;
+                                        self.internal.terms[i].Desc = desc;
+                                        break;
+                                    }
+                                }
+
+                                self._reset(['hierarchy', 'select list', 'terms list', 'submit', 'internals']);
+
+                                $(this).dialog('close');
+                            }
+                        }
+                    ]
+                });
+
                 for (var i = self.internal.terms.length - 1; i >= 0; i--) {
                     if (self.internal.terms[i].Id == id ) {
-                        self.$el.find(self.options.dialog+' #name').val(self.internal.terms[i].Name);
-                        self.$el.find(self.options.dialog+' #slug').val(self.internal.terms[i].Slug);
-                        self.$el.find(self.options.dialog+' #description').val(self.internal.terms[i].Desc);
-                        self.$el.find(self.options.dialog+' #id').val(id);
+                        $(self.options.dialog+' #name').val(self.internal.terms[i].Name);
+                        $(self.options.dialog+' #slug').val(self.internal.terms[i].Slug);
+                        $(self.options.dialog+' #description').val(self.internal.terms[i].Desc);
+                        $(self.options.dialog+' #id').val(id);
                         break;
                     }
                 }
 
-                self.$el.find(self.options.dialog).dialog('open');
+                $(self.options.dialog).dialog('open');
             });
 
-            // Generate Terms button
+            // Generate Terms button clicked
             self.$el.find(self.options.generateTermsButton).on('click', function(e){
                 e.preventDefault();
 
                 if (self.stats.termsToAdd === 0 )
                     return false;
 
+                self.internal.active = true;
+
+                $(self.options.dialog).html(self.templates.add);
+
+                // Create the dialog box
+                $(self.options.dialog).dialog('option', {
+                    dialogClass: 'btg-dialog-add',
+                    title: btg_object.i18n.generating_terms,
+                    buttons: [
+                        {
+                            text: btg_object.i18n.stop,
+                            class: 'ui-button-save',
+                            click: function() {
+                                self.internal.active = false;
+                                self.internal.paused = false;
+                                $(this).dialog('close');
+                            }
+                        },
+                        {
+                            text: btg_object.i18n.pause,
+                            class: 'ui-button-pause',
+                            click: function(){
+                                self.internal.paused = ( self.internal.paused ) ? false : true;
+                                if ( self.internal.paused ) {
+                                    $('.ui-button-pause .ui-button-text').text(btg_object.i18n.continue);
+                                    $('.ui-button-pause').toggleClass('ui-button-pause ui-button-continue');
+                                } else {
+                                    $('.ui-button-continue .ui-button-text').text('Pause');
+                                    $('.ui-button-continue').toggleClass('ui-button-continue ui-button-pause');
+                                    self.internal.active = true;
+                                    self._processNextTerm();
+                                }
+                            }
+                        }
+                    ]
+                });
+
+                // Create the progress meter
+                $(self.options.progressBar).progressbar({value: 0});
+
                 var window_width = $(window).width();
 
                 // If we're on a larger screen, cap the dialog width at 600px
                 if ( window_width >= 960){
-                    self.$el.find(self.options.dialog).dialog( "option", "width", 600 );
+                    $(self.options.dialog).dialog( 'option', 'width', 600 );
                 } else {
-                    self.$el.find(self.options.dialog).dialog( "option", "width", '80%' );
+                    $(self.options.dialog).dialog( 'option', 'width', '80%' );
                 }
 
-                self._reset(['dialog']);
-
-                self.$el.find(self.options.dialog).dialog('open');
+                $(self.options.dialog).dialog('open');
 
                 self._processNextTerm();
 
@@ -175,7 +246,6 @@
 
         };
 
-        // TODO: Clean this up, handle errors better
         self.handleAJAX = function( term ) {
             var parent = ( typeof term.Parent === 'string' && term.Parent.indexOf('new_') === 0 ) ? self.internal.history[term.Parent] : term.Parent;
 
@@ -183,10 +253,10 @@
             $('.progress-status em').text('"'+term.Name+'"');
 
             $.ajax({
-                type: "POST",
+                type: 'POST',
                 url: window.btg_object.admin_url,
                 data: {
-                    action: "btg_add_term",
+                    action: 'btg_add_term',
                     term_name: term.Name,
                     taxonomy: window.btg_object.taxonomy,
                     parent: parent,
@@ -203,6 +273,11 @@
 
                     if ( data.success || data.error == 'term_exists' ) {
 
+                        if ( data.error == 'term_exists' ) {
+                            // Increase "terms skipped" stat
+                            self.stats.termsSkipped++;
+                        }
+
                         // Add new ID and old ID so it can be looked up later
                         self.internal.history[term.Id] = data.new_id;
 
@@ -211,13 +286,22 @@
                         self.internal.cache[self.internal.cache.length -1].Parent = parseInt(data.parent_id);
 
                         // Update the progress meter
-                        self.$el.find(self.options.progressBar).progressbar( "option", "value", ++self.stats.termsAdded / self.stats.termsToAdd * 100 );
+                        $(self.options.progressBar).progressbar( 'option', 'value', ++self.stats.termsAdded / self.stats.termsToAdd * 100 );
 
-                        // Process next term
-                        self._processNextTerm();
+                        if ( self.internal.active ){
+                            // Process next term
+                            self._processNextTerm();
+                        } else {
+                            // Stop button was pressed
+                            self._reset(['merge', 'hierarchy', 'select list', 'terms list', 'dialog', 'internals', 'submit']);
+                            self.stats.termsToAdd = self.stats.termsToAdd - (self.stats.termsAdded + self.stats.termsSkipped);
+                            self.stats.termsAdded = 0;
+                            self.stats.termsSkipped = 0;
+                        }
 
                     } else {
 
+                        self.stats.errors++;
                         console.log(data);
 
                     }
@@ -254,25 +338,13 @@
                         Id: key,
                         Name: terms[i][0],
                         Parent: parent,
-                        Slug: terms[i][1],
-                        Desc: terms[i][2]
+                        Slug: terms[i][1] || '',
+                        Desc: terms[i][2] || ''
                     };
 
                 self.internal.terms.push(term);
                 self.stats.termsToAdd++;
             }
-        };
-
-        /**
-         * Object Constructors
-         */
-
-        var Term = function( id, name, parent, slug, desc ) {
-            this.Id = parseInt(id);
-            this.Name = name;
-            this.Parent = parseInt(parent);
-            this.Slug = slug || '';
-            this.Desc = desc || '';
         };
 
         /**
@@ -293,6 +365,11 @@
         };
 
         self._processNextTerm = function() {
+
+            // If job is paused or inactive, stop
+            if ( self.internal.paused || !self.internal.active )
+                return;
+
             // If there are no more terms, finish the job
             if ( self.internal.terms.length === 0 ){
                 self._finishJob();
@@ -300,7 +377,7 @@
             }
 
             // Get and remove a term
-            var data = Array.prototype.shift.apply(terms);
+            var data = Array.prototype.shift.apply(self.internal.terms);
             // Temporarily store it
             self.internal.cache.push(data);
 
@@ -325,7 +402,9 @@
             }
 
             if ( $.inArray('merge', option) > -1 || !option ){
-                $.merge(self.internal.terms, self.internal.cache);
+                $.merge(self.internal.cache, self.internal.terms);
+                self.internal.terms = self.internal.cache;
+                self.internal.cache = '';
             }
 
             if ( $.inArray('hierarchy', option) > -1 || !option ){
@@ -346,14 +425,6 @@
 
             if ( $.inArray('internals', option) > -1 || !option ){
                 self._resetInternals();
-            }
-
-            if ( $.inArray('dialog', option) > -1 || !option ){
-                self._resetDialog();
-            }
-
-            if ( $.inArray('progressBar', option) > -1 || !option ){
-                self._resetProgressBar();
             }
 
             if ( $.inArray('submit', option) > -1 || !option ){
@@ -402,7 +473,7 @@
 
         self._updateTermList = function() {
             if ( self.internal.hierarchy.length === 0 ){
-                self.$el.find(self.options.termListContainer).html('<p>No terms yet. Add some below!</p>');
+                self.$el.find(self.options.termListContainer).html('<p>'+btg_object.i18n.no_terms_yet+'</p>');
                 return;
             }
 
@@ -410,7 +481,7 @@
                 self._getListItems(self.internal.hierarchy[i]);
             }
 
-            self.$el.find(self.options.termListContainer).html('<ul id="term-list">'+self.internal.listItems+'</ul>');
+            self.$el.find(self.options.termListContainer).empty().html('<ul id=\'term-list\'>'+self.internal.listItems+'</ul>');
         };
 
         self._resetStats = function() {
@@ -430,35 +501,15 @@
             self.internal.seperators = 0;
         };
 
-        // TODO: Remove this
-        self._resetDialog = function() {
-            // Reset progress bar
-            self.$el.find(self.options.progressBar).progressbar({value: 0});
-
-            // Reset the dialog box
-            self.$el.find(self.options.dialog).dialog('option', {
-                dialogClass: 'btg-dialog-add',
-                title: "Generating Terms...",
-                buttons: [{
-                    text: "Stop",
-                    click: function() {
-                        $(this).dialog('close');
-                    }
-                }]
-            });
-            self.$el.find(self.options.dialog+' .completed').hide();
-            self.$el.find(self.options.dialog+' .in-progress').show();
-        };
-
         self._termsFieldIsEmpty = function(){
             return ( self.$el.find(self.options.termsField).val().replace(/\r\n/g, '').replace(/\n/g, '') === '' );
         };
 
         self._maybeDisableSubmit = function(){
             if ( self.stats.termsToAdd > 0 ) {
-                self.$el.find(self.options.generateTermsButton).prop("disabled", false);
+                self.$el.find(self.options.generateTermsButton).prop('disabled', false);
             } else {
-                self.$el.find(self.options.generateTermsButton).prop("disabled", true);
+                self.$el.find(self.options.generateTermsButton).prop('disabled', true);
             }
         };
 
@@ -497,20 +548,20 @@
             return sep;
         };
 
-        // TODO: Redo this
         self._finishJob = function() {
             self.internal.active = false;
 
             // Display "Completed" message in dialog box
-            $('.btg-dialog-add .in-progress').hide();
-            $('.btg-dialog-add .completed').show();
-            var status_text = (self.stats.termsAdded === 1) ? self.stats.termsAdded+' term has' : self.stats.termsAdded+' terms have';
-            $('.btg-dialog-add .num-term-created').text(status_text);
+            $(self.options.dialog+' .btg-dialog-add .in-progress').hide();
+            $(self.options.dialog+'.btg-dialog-add .completed').show();
+            var status_text = (self.stats.termsAdded === 1) ? btg_object.i18n.term_added.format(self.stats.termsAdded) : btg_object.i18n.terms_added.format(self.stats.termsAdded);
+            $(self.options.dialog+'.btg-dialog-add .num-term-created').text(status_text);
 
-            $( "#btg-dialog-add" ).dialog( "option", {
-                    title: "Finished adding terms!",
+            $(self.options.dialog).dialog( "option",
+                {
+                    title: btg_object.i18n.finished_adding_terms,
                     buttons: [{
-                        text: "Close",
+                        text: btg_object.i18n.close,
                         click: function() {
                             $(this).dialog('close');
                         }
@@ -524,15 +575,12 @@
 
         // Add a "format" function to the String prototype
         if (!String.prototype.format) {
-          String.prototype.format = function() {
-            var args = arguments;
-            return this.replace(/{(\d+)}/g, function(match, number) {
-              return typeof args[number] != 'undefined'
-                ? args[number]
-                : match
-              ;
-            });
-          };
+            String.prototype.format = function() {
+                var args = arguments;
+                return this.replace(/{(\d+)}/g, function(match, number) {
+                    return typeof args[number] != 'undefined' ? args[number] : match;
+                });
+            };
         }
 
         /*********************/
