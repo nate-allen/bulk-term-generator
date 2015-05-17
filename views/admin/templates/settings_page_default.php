@@ -1,6 +1,6 @@
 <div class="wrap bulk-term-generator" id="btg-default">
 
-    <h2>Bulk Term Generator</h2>
+    <h2><?php _e('Bulk Term Generator', 'bulk-term-generator') ?></h2>
 
     <?php if ( !empty($error) ) : ?>
         <div class="error">
@@ -8,7 +8,7 @@
         </div>
     <?php endif ?>
 
-    <p>First, choose a taxonomy you'd like to add terms to:</p>
+    <p><?php _e("First, choose a taxonomy you'd like to add terms to:", 'bulk-term-generator') ?></p>
 
     <form method="post">
 
@@ -16,7 +16,7 @@
             <tbody>
                 <tr>
                     <th scope="row">
-                        <label for="chosen_taxonmy">Taxonomy <? $hook_suffix ?></label>
+                        <label for="chosen_taxonmy"><?php _e('Taxonomy', 'bulk-term-generator') ?></label>
                     </th>
                     <td>
                         <?= $taxonomy_select_list ?>
@@ -26,7 +26,7 @@
         </table>
 
         <p class="submit">
-            <input type="submit" class="button button-secondary" name="btg_select_taxonomy_submit" value="Select Taxonomy">
+            <input type="submit" class="button button-secondary" name="btg_select_taxonomy_submit" value="<?php esc_attr_e('Select Taxonomy', 'bulk-term-generator') ?>">
         </p>
 
         <input type="hidden" name="action" value="taxonomy_selected">
