@@ -257,12 +257,12 @@
                 url: window.btg_object.admin_url,
                 data: {
                     action: 'btg_add_term',
+                    _ajax_nonce: self.$el.find(self.options.nonce).val(),
                     term_name: term.Name,
                     taxonomy: window.btg_object.taxonomy,
                     parent: parent,
                     slug: term.Slug,
-                    desc: term.Desc,
-                    _ajax_nonce: self.$el.find(self.options.nonce).val()
+                    desc: term.Desc
                 },
                 success: function(data){
 
@@ -552,10 +552,10 @@
             self.internal.active = false;
 
             // Display "Completed" message in dialog box
-            $(self.options.dialog+' .btg-dialog-add .in-progress').hide();
-            $(self.options.dialog+'.btg-dialog-add .completed').show();
+            $(self.options.dialog+' .in-progress').hide();
+            $(self.options.dialog+' .completed').show();
             var status_text = (self.stats.termsAdded === 1) ? btg_object.i18n.term_added.format(self.stats.termsAdded) : btg_object.i18n.terms_added.format(self.stats.termsAdded);
-            $(self.options.dialog+'.btg-dialog-add .num-term-created').text(status_text);
+            $(self.options.dialog+' .num-term-created').text(status_text);
 
             $(self.options.dialog).dialog( "option",
                 {
