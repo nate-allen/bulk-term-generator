@@ -251,7 +251,6 @@ class Bulk_Term_Generator_Admin {
                     'terms_added' => __('{0} terms have been added', 'bulk-term-generator'),
                     'finished_adding_terms' => __('Finished adding terms!', 'bulk-term-generator'),
                     'close' => __('Close', 'bulk-term-generator'),
-
                 )
             )
         );
