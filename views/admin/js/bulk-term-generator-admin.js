@@ -357,8 +357,10 @@
 
             // Seperate terms by comma, and trim the white space
             for (var i = 0; i < terms.length; i++) {
-
-                processedTerms.push($.map(terms[i].split(','), $.trim));
+                console.log(terms[i].match(/([^,]+),([^,]+),(.*)/));
+                var terms_array = terms[i].replace( '\\,', '{COMMA}' ).split(',').map(function(v){return v.replace('{COMMA}',',');});
+                terms_array = $.map(terms_array, $.trim);
+                processedTerms.push(terms_array);
             }
 
             return processedTerms;

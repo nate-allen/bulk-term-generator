@@ -12,7 +12,7 @@
  * Plugin Name:       Bulk Term Generator
  * Plugin URI:        http://nateallen.com/wordpress-plugins/bulk-term-generator
  * Description:       Provides the ability to add terms to taxonomies in bulk
- * Version:           1.0.2
+ * Version:           1.2.0
  * Author:            Nate Allen
  * Author URI:        http://nateallen.com/
  * License:           GPL-2.0+

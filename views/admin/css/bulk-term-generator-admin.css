@@ -39,6 +39,8 @@
 #btg-generate-terms .btg-terms-to-add {
     width: 100%;
     max-width: 800px;
+    white-space: nowrap;
+    overflow: auto;
 }
 #btg-generate-terms .example {
     font-family: monospace;

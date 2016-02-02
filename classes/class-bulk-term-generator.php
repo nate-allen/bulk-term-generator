@@ -43,7 +43,7 @@ class Bulk_Term_Generator {
     public function __construct() {
 
         $this->plugin_name = 'bulk-term-generator';
-        $this->version = '1.0.2';
+        $this->version = '1.2.0';
 
         $this->load_dependencies();
         $this->set_locale();
