@@ -3,8 +3,8 @@ Contributors: nateallen
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=email%40nateallen%2ecom
 Tags: nate allen,add,bulk,mass,multiple,create,term,terms,taxonomy,taxonomies,categories,tags,generator,creator,keywords,slug
 Requires at least: 3.1
-Tested up to: 4.1.1
-Stable tag: trunk
+Tested up to: 4.3.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,16 @@ Now there's a better way...
 4. You can see which terms will be added before they are generated. This gives you a chance to make any changes before the final step.
 5. When you're ready, just hit the "Generate Terms" button, and you're done!
 
+= Localization =
+Bulk Term Generator developed ready for translation.
+
+This plugin has been translated to the following languages:
+
+* English
+* Spanish (Mexico)
+
+Please let me know if you're interested in providing translations!
+
 == Installation ==
 
 1. Upload the folder `bulk-term-generator` to the `/wp-content/plugins/` directory
@@ -38,10 +48,21 @@ This plugin is new, so there aren't any "Frequently Asked Questions" yet! Use th
 
 == Screenshots ==
 
-1. Adding a big list of terms to a custom taxonomy
-2. Preview the terms before they're generated
+1. Adding a big list of terms to a custom taxonomy, one per line. Optional: Specify the slug and/or description.
+2. Preview the terms before they're generated.
+3. Watch the terms being created in real time. Pause or Cancel at any point.
+4. Adding or editing the slug and/or description before generating the terms is easy.
 
 == Changelog ==
 
-= 0.1 =
+= 1.2.0 =
+* Added ability to escape commas
+
+= 1.1.0 =
+* Disabled line wrapping in the main text area
+
+= 1.0.2 =
+* Added screenshots
+
+= 1.0.1 =
 * Initial release
