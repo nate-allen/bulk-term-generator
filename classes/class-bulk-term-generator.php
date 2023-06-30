@@ -100,6 +100,11 @@ class Bulk_Term_Generator {
         $this->loader->add_action( 'wp_ajax_btg_add_term', $plugin_admin, 'add_term');
         $this->loader->add_action( 'init', $plugin_admin, 'taxonomy_select' );
 
+        $taxonomies = get_taxonomies();
+        foreach ( $taxonomies as $taxonomy ) {
+            $this->loader->add_action( "{$taxonomy}_add_form", $plugin_admin, 'taxonomy_table' );
+        }
+
     }
 
     /**

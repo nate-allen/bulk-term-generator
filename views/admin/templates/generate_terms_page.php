@@ -73,7 +73,9 @@
 
                 <h3><?php _e('About', 'bulk-term-generator') ?></h3>
 
-                <p><?php _e('<strong>Bulk Term Generator</strong> was developed by Nate Allen, Senior Web Developer at <a href="http://fireflypartners.com">Firefly Partners</a>.', 'bulk-term-generator') ?></p>
+                <p><?php _e('<strong>Bulk Term Generator</strong> was developed by <a href="https://www.linkedin.com/in/nate-allen">Nate Allen</a>, Code Wrangler at <a href="https://automattic.com/work-with-us/">Automattic</a>.', 'bulk-term-generator') ?></p>
+
+                <p><?php _e('If you found this plugin useful, please consider <a href="https://wordpress.org/support/plugin/bulk-term-generator/reviews/#new-post">giving it five stars</a>!', 'bulk-term-generator') ?></p>
 
             </div>
 
@@ -81,7 +83,7 @@
 
                 <h3><?php _e('Support', 'bulk-term-generator') ?></h3>
 
-                <p><?php _e('If need help, check out the support page for the plugin. I will do my best to answer questions or patch bugs. Please be patient; this is a free plugin and I have a full-time job. :)', 'bulk-term-generator') ?></p>
+                <p><?php _e('If you need help, <a href="https://wordpress.org/support/plugin/bulk-term-generator">check out the support page for the plugin</a>. I will do my best to answer questions or patch bugs.', 'bulk-term-generator') ?></p>
 
             </div>
 
@@ -89,7 +91,7 @@
 
                 <h3><?php _e('Feedback', 'bulk-term-generator') ?></h3>
 
-                <p><?php _e('Do you have an idea for an improvement? <a href="mailto:email@ncallen.com">Email me</a> and I\'ll see what I can do. Or better yet, <a href="https://github.com/nate-allen/bulk-term-generator">contribute code to the Github repository</a>!', 'bulk-term-generator') ?></p>
+                <p><?php _e('Do you have an idea for an improvement? <a href="https://twitter.com/hyphen_nate">Message me on Twitter</a> and I\'ll see what I can do. Or better yet, <a href="https://github.com/nate-allen/bulk-term-generator">contribute code to the Github repository</a>!', 'bulk-term-generator') ?></p>
 
             </div>
 

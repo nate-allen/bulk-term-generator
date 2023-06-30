@@ -199,6 +199,17 @@ class Bulk_Term_Generator_Admin {
 
     }
 
+    public function taxonomy_table( $taxonomy ) {
+        $tax_object = get_taxonomy( $taxonomy );
+
+        printf(
+        __( '<p><strong>Hint: You can save time by <a href="%1$s?page=bulk_term_generator_options&taxonomy=%2$s">adding %3$s in bulk</a></strong></p>', 'bulk-term-generator' ),
+        admin_url( 'tools.php' ),
+        esc_attr( $taxonomy ),
+        esc_attr( $tax_object->labels->name )
+        );
+    }
+
     /**
      * Private Functions
      */
