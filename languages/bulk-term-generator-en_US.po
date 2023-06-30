@@ -1,14 +1,13 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Bulk Term Generator\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-30 18:33+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"PO-Revision-Date: 2023-06-30 18:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: English (United States)\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,11 +17,11 @@ msgstr ""
 
 #: views/admin/templates/generate_terms_page.php:32
 msgid "(ie: United States, united_states, Population is 317 Million)"
-msgstr ""
+msgstr "(ie: United States, united_states, Population is 317 Million)"
 
 #: views/admin/templates/generate_terms_page.php:44
 msgid "(Sorry, this taxonomy isn't hierarchical)"
-msgstr ""
+msgstr "(Sorry, this taxonomy isn't hierarchical)"
 
 #: classes/class-bulk-term-generator-admin.php:206
 #, php-format
@@ -31,6 +30,9 @@ msgid ""
 "page=bulk_term_generator_options&taxonomy=%2$s\">adding %3$s in bulk</a>"
 "</strong></p>"
 msgstr ""
+"<p><strong>Hint: You can save time by <a href=\"%1$s?"
+"page=bulk_term_generator_options&taxonomy=%2$s\">adding %3$s in bulk</a>"
+"</strong></p>"
 
 #: views/admin/templates/generate_terms_page.php:76
 msgid ""
@@ -38,41 +40,45 @@ msgid ""
 "linkedin.com/in/nate-allen\">Nate Allen</a>, Code Wrangler at <a "
 "href=\"https://automattic.com/work-with-us/\">Automattic</a>."
 msgstr ""
+"<strong>Bulk Term Generator</strong> was developed by <a href=\"https://www."
+"linkedin.com/in/nate-allen\">Nate Allen</a>, Code Wrangler at <a "
+"href=\"https://automattic.com/work-with-us/\">Automattic</a>."
 
 #: views/admin/templates/generate_terms_page.php:74
 msgid "About"
-msgstr ""
+msgstr "About"
 
 #: views/admin/templates/generate_terms_page.php:25
 msgid "Add Terms"
-msgstr ""
+msgstr "Add Terms"
 
 #: views/admin/templates/generate_terms_page.php:54
 msgid "Add Terms to Queue"
-msgstr ""
+msgstr "Add Terms to Queue"
 
 #. Name of the plugin
 #: views/admin/templates/settings_page_default.php:3
 #: views/admin/templates/generate_terms_page.php:3
 msgid "Bulk Term Generator"
-msgstr ""
+msgstr "Bulk Term Generator"
 
 #: classes/class-bulk-term-generator-admin.php:253
 msgid ""
 "Click the 'Generate Terms' button at the bottom of the page before you leave."
 msgstr ""
+"Click the 'Generate Terms' button at the bottom of the page before you leave."
 
 #: classes/class-bulk-term-generator-admin.php:264
 msgid "Close"
-msgstr ""
+msgstr "Close"
 
 #: classes/class-bulk-term-generator-admin.php:259
 msgid "Continue"
-msgstr ""
+msgstr "Continue"
 
 #: classes/class-bulk-term-generator-admin.php:247
 msgid "Creating"
-msgstr ""
+msgstr "Creating"
 
 #: views/admin/templates/generate_terms_page.php:94
 msgid ""
@@ -81,46 +87,50 @@ msgid ""
 "better yet, <a href=\"https://github.com/nate-allen/bulk-term-generator\">"
 "contribute code to the Github repository</a>!"
 msgstr ""
+"Do you have an idea for an improvement? <a href=\"https://twitter."
+"com/hyphen_nate\">Message me on Twitter</a> and I'll see what I can do. Or "
+"better yet, <a href=\"https://github.com/nate-allen/bulk-term-generator\">"
+"contribute code to the Github repository</a>!"
 
 #: classes/class-bulk-term-generator-admin.php:248
 msgid "Done!"
-msgstr ""
+msgstr "Done!"
 
 #: classes/class-bulk-term-generator-admin.php:254
 msgid "Edit Term"
-msgstr ""
+msgstr "Edit Term"
 
 #: views/admin/templates/generate_terms_page.php:28
 msgid "Enter each term below <span>on its own line</span>."
-msgstr ""
+msgstr "Enter each term below <span>on its own line</span>."
 
 #: views/admin/templates/generate_terms_page.php:92
 msgid "Feedback"
-msgstr ""
+msgstr "Feedback"
 
 #: classes/class-bulk-term-generator-admin.php:263
 msgid "Finished adding terms!"
-msgstr ""
+msgstr "Finished adding terms!"
 
 #: views/admin/templates/settings_page_default.php:11
 msgid "First, choose a taxonomy you'd like to add terms to:"
-msgstr ""
+msgstr "First, choose a taxonomy you'd like to add terms to:"
 
 #: views/admin/templates/generate_terms_page.php:55
 msgid "Generate Terms"
-msgstr ""
+msgstr "Generate Terms"
 
 #: classes/class-bulk-term-generator-admin.php:256
 msgid "Generating Terms..."
-msgstr ""
+msgstr "Generating Terms..."
 
 #. Author URI of the plugin
 msgid "http://nateallen.com/"
-msgstr ""
+msgstr "http://nateallen.com/"
 
 #. URI of the plugin
 msgid "http://nateallen.com/wordpress-plugins/bulk-term-generator"
-msgstr ""
+msgstr "http://nateallen.com/wordpress-plugins/bulk-term-generator"
 
 #: views/admin/templates/generate_terms_page.php:78
 msgid ""
@@ -128,6 +138,9 @@ msgid ""
 "org/support/plugin/bulk-term-generator/reviews/#new-post\">giving it five "
 "stars</a>!"
 msgstr ""
+"If you found this plugin useful, please consider <a href=\"https://wordpress."
+"org/support/plugin/bulk-term-generator/reviews/#new-post\">giving it five "
+"stars</a>!"
 
 #: views/admin/templates/generate_terms_page.php:86
 msgid ""
@@ -135,83 +148,88 @@ msgid ""
 "generator\">check out the support page for the plugin</a>. I will do my best "
 "to answer questions or patch bugs."
 msgstr ""
+"If you need help, <a href=\"https://wordpress.org/support/plugin/bulk-term-"
+"generator\">check out the support page for the plugin</a>. I will do my best "
+"to answer questions or patch bugs."
 
 #: classes/class-bulk-term-generator-admin.php:249
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #. Author of the plugin
 msgid "Nate Allen"
-msgstr ""
+msgstr "Nate Allen"
 
 #: classes/class-bulk-term-generator-admin.php:260
 #: views/admin/templates/generate_terms_page.php:21
 msgid "No terms yet. Add some below!"
-msgstr ""
+msgstr "No terms yet. Add some below!"
 
 #: views/admin/templates/generate_terms_page.php:13
 #, php-format
 msgid "On this page you can add terms to the %s taxonomy in bulk."
-msgstr ""
+msgstr "On this page you can add terms to the %s taxonomy in bulk."
 
 #: views/admin/templates/generate_terms_page.php:31
 msgid "Optional:"
-msgstr ""
+msgstr "Optional:"
 
 #: views/admin/templates/generate_terms_page.php:39
 msgid "Parent"
-msgstr ""
+msgstr "Parent"
 
 #: classes/class-bulk-term-generator-admin.php:258
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #. Description of the plugin
 msgid "Provides the ability to add terms to taxonomies in bulk"
-msgstr ""
+msgstr "Provides the ability to add terms to taxonomies in bulk"
 
 #: classes/class-bulk-term-generator-admin.php:255
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: views/admin/templates/settings_page_default.php:29
 msgid "Select Taxonomy"
-msgstr ""
+msgstr "Select Taxonomy"
 
 #: classes/class-bulk-term-generator-admin.php:250
 msgid "Slug"
-msgstr ""
+msgstr "Slug"
 
 #: classes/class-bulk-term-generator-admin.php:257
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 #: views/admin/templates/generate_terms_page.php:84
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: views/admin/templates/settings_page_default.php:19
 msgid "Taxonomy"
-msgstr ""
+msgstr "Taxonomy"
 
 #: views/admin/templates/generate_terms_page.php:31
 msgid ""
 "You can specify the \"slug\" and \"description\" for each term by seperating "
 "them with commas."
 msgstr ""
+"You can specify the \"slug\" and \"description\" for each term by seperating "
+"them with commas."
 
 #: classes/class-bulk-term-generator-admin.php:252
 msgid "Your terms haven't been created yet!"
-msgstr ""
+msgstr "Your terms haven't been created yet!"
 
 #: views/admin/templates/generate_terms_page.php:15
 msgid "Your Terms:"
-msgstr ""
+msgstr "Your Terms:"
 
 #: classes/class-bulk-term-generator-admin.php:261
 msgid "{0} term has been added"
-msgstr ""
+msgstr "{0} term has been added"
 
 #: classes/class-bulk-term-generator-admin.php:262
 msgid "{0} terms have been added"
-msgstr ""
+msgstr "{0} terms have been added"

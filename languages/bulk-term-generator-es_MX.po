@@ -1,131 +1,239 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2015-05-16 21:07-0500\n"
-"PO-Revision-Date: 2015-05-16 21:34-0500\n"
+"Project-Id-Version: Bulk Term Generator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-30 18:33+0000\n"
+"PO-Revision-Date: 2023-06-30 18:50+0000\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Spanish (Mexico)\n"
+"Language: es_MX\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.6\n"
-"X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e;esc_attr_e\n"
-"Language: es_MX\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.4; wp-6.2.2\n"
+"X-Domain: bulk-term-generator"
 
-#: ../views/admin/templates/generate_terms_page.php:3
-#: ../views/admin/templates/settings_page_default.php:3
+#: views/admin/templates/generate_terms_page.php:32
+msgid "(ie: United States, united_states, Population is 317 Million)"
+msgstr ""
+"(es decir: Estados Unidos, estados_unidos, la población es de 317 millones)"
+
+#: views/admin/templates/generate_terms_page.php:44
+msgid "(Sorry, this taxonomy isn't hierarchical)"
+msgstr "(Lo siento, esta taxonomía no es jerárquica)"
+
+#: classes/class-bulk-term-generator-admin.php:206
+#, php-format
+msgid ""
+"<p><strong>Hint: You can save time by <a href=\"%1$s?"
+"page=bulk_term_generator_options&taxonomy=%2$s\">adding %3$s in bulk</a>"
+"</strong></p>"
+msgstr ""
+"<p><strong>Sugerencia: puede ahorrar tiempo <a href=\"%1$s?"
+"page=bulk_term_generator_options&taxonomy=%2$s\">agregar %3$s de forma "
+"masiva</a></strong></ p>"
+
+#: views/admin/templates/generate_terms_page.php:76
+msgid ""
+"<strong>Bulk Term Generator</strong> was developed by <a href=\"https://www."
+"linkedin.com/in/nate-allen\">Nate Allen</a>, Code Wrangler at <a "
+"href=\"https://automattic.com/work-with-us/\">Automattic</a>."
+msgstr ""
+"<strong>Generador de términos masivos</strong> fue desarrollado por <a "
+"href=\"https://www.linkedin.com/in/nate-allen\">Nate Allen</a>, Code "
+"Wrangler en <a href=\" https://automattic.com/work-with-us/\">Automattic</a>."
+
+#: views/admin/templates/generate_terms_page.php:74
+msgid "About"
+msgstr "Acerca de"
+
+#: views/admin/templates/generate_terms_page.php:25
+msgid "Add Terms"
+msgstr "Agregar Términos"
+
+#: views/admin/templates/generate_terms_page.php:54
+msgid "Add Terms to Queue"
+msgstr "Agregar términos a la cola"
+
+#. Name of the plugin
+#: views/admin/templates/settings_page_default.php:3
+#: views/admin/templates/generate_terms_page.php:3
 msgid "Bulk Term Generator"
 msgstr "Bulk Term Generator"
 
-#: ../views/admin/templates/generate_terms_page.php:13
+#: classes/class-bulk-term-generator-admin.php:253
+msgid ""
+"Click the 'Generate Terms' button at the bottom of the page before you leave."
+msgstr ""
+"Haga clic en el botón 'Generar términos' en la parte inferior de la página "
+"antes de salir."
+
+#: classes/class-bulk-term-generator-admin.php:264
+msgid "Close"
+msgstr "Cerrar"
+
+#: classes/class-bulk-term-generator-admin.php:259
+msgid "Continue"
+msgstr "Continuar"
+
+#: classes/class-bulk-term-generator-admin.php:247
+msgid "Creating"
+msgstr "Creando"
+
+#: views/admin/templates/generate_terms_page.php:94
+msgid ""
+"Do you have an idea for an improvement? <a href=\"https://twitter."
+"com/hyphen_nate\">Message me on Twitter</a> and I'll see what I can do. Or "
+"better yet, <a href=\"https://github.com/nate-allen/bulk-term-generator\">"
+"contribute code to the Github repository</a>!"
+msgstr ""
+"¿Tienes una idea para mejorar? ¡<a href=\"https://twitter.com/hyphen_nate\">"
+"Envíame un mensaje en Twitter</a> y veré qué puedo hacer. O mejor aún, <a "
+"href=\"https://github.com/nate-allen/bulk-term-generator\">contribuya con "
+"código al repositorio de Github</a>!"
+
+#: classes/class-bulk-term-generator-admin.php:248
+msgid "Done!"
+msgstr "¡Hecho!"
+
+#: classes/class-bulk-term-generator-admin.php:254
+msgid "Edit Term"
+msgstr "Editar término"
+
+#: views/admin/templates/generate_terms_page.php:28
+msgid "Enter each term below <span>on its own line</span>."
+msgstr "Ingrese cada término a continuación <span>en su propia línea</span>."
+
+#: views/admin/templates/generate_terms_page.php:92
+msgid "Feedback"
+msgstr "Comentario"
+
+#: classes/class-bulk-term-generator-admin.php:263
+msgid "Finished adding terms!"
+msgstr "¡Terminó de agregar términos!"
+
+#: views/admin/templates/settings_page_default.php:11
+msgid "First, choose a taxonomy you'd like to add terms to:"
+msgstr "Primero, elija una taxonomía a la que le gustaría agregar términos:"
+
+#: views/admin/templates/generate_terms_page.php:55
+msgid "Generate Terms"
+msgstr "Generar términos"
+
+#: classes/class-bulk-term-generator-admin.php:256
+msgid "Generating Terms..."
+msgstr "Generando Términos..."
+
+#. Author URI of the plugin
+msgid "http://nateallen.com/"
+msgstr "http://nateallen.com/"
+
+#. URI of the plugin
+msgid "http://nateallen.com/wordpress-plugins/bulk-term-generator"
+msgstr "http://nateallen.com/wordpress-plugins/bulk-term-generator"
+
+#: views/admin/templates/generate_terms_page.php:78
+msgid ""
+"If you found this plugin useful, please consider <a href=\"https://wordpress."
+"org/support/plugin/bulk-term-generator/reviews/#new-post\">giving it five "
+"stars</a>!"
+msgstr ""
+"Si encuentra útil este complemento, ¡considere <a href=\"https://wordpress."
+"org/support/plugin/bulk-term-generator/reviews/#new-post\">darle cinco "
+"estrellas</a>!"
+
+#: views/admin/templates/generate_terms_page.php:86
+msgid ""
+"If you need help, <a href=\"https://wordpress.org/support/plugin/bulk-term-"
+"generator\">check out the support page for the plugin</a>. I will do my best "
+"to answer questions or patch bugs."
+msgstr ""
+"Si necesita ayuda, <a href=\"https://wordpress.org/support/plugin/bulk-term-"
+"generator\">consulte la página de soporte del complemento</a>. Haré todo lo "
+"posible para responder preguntas o parchear errores."
+
+#: classes/class-bulk-term-generator-admin.php:249
+msgid "Name"
+msgstr "Nombre"
+
+#. Author of the plugin
+msgid "Nate Allen"
+msgstr "Nate Allen"
+
+#: classes/class-bulk-term-generator-admin.php:260
+#: views/admin/templates/generate_terms_page.php:21
+msgid "No terms yet. Add some below!"
+msgstr "Aún no hay términos. ¡Agregue algunos a continuación!"
+
+#: views/admin/templates/generate_terms_page.php:13
 #, php-format
 msgid "On this page you can add terms to the %s taxonomy in bulk."
 msgstr ""
-"En esta página usted puede añadir términos a la taxonomía de %s a granel."
+"En esta página puede agregar términos a la taxonomía %s de forma masiva."
 
-#: ../views/admin/templates/generate_terms_page.php:15
-msgid "Your Terms:"
-msgstr "Sus Términos:"
-
-#: ../views/admin/templates/generate_terms_page.php:21
-msgid "No terms yet. Add some below!"
-msgstr "No hay término. Agregue un poco de abajo!"
-
-#: ../views/admin/templates/generate_terms_page.php:25
-msgid "Add Terms"
-msgstr "Añadir Términos"
-
-#: ../views/admin/templates/generate_terms_page.php:28
-msgid "Enter each term below <span>on its own line</span>."
-msgstr ""
-"Escriba a continuación Cada término <span> en ictos propia línea </ span>."
-
-#: ../views/admin/templates/generate_terms_page.php:31
+#: views/admin/templates/generate_terms_page.php:31
 msgid "Optional:"
 msgstr "Opcional:"
 
-#: ../views/admin/templates/generate_terms_page.php:31
+#: views/admin/templates/generate_terms_page.php:39
+msgid "Parent"
+msgstr "Principal"
+
+#: classes/class-bulk-term-generator-admin.php:258
+msgid "Pause"
+msgstr "Pausa"
+
+#. Description of the plugin
+msgid "Provides the ability to add terms to taxonomies in bulk"
+msgstr ""
+"Brinda la capacidad de agregar términos a las taxonomías de forma masiva"
+
+#: classes/class-bulk-term-generator-admin.php:255
+msgid "Save"
+msgstr "Guardar"
+
+#: views/admin/templates/settings_page_default.php:29
+msgid "Select Taxonomy"
+msgstr "Seleccionar taxonomía"
+
+#: classes/class-bulk-term-generator-admin.php:250
+msgid "Slug"
+msgstr "Slug"
+
+#: classes/class-bulk-term-generator-admin.php:257
+msgid "Stop"
+msgstr "Detener"
+
+#: views/admin/templates/generate_terms_page.php:84
+msgid "Support"
+msgstr "Apoyar"
+
+#: views/admin/templates/settings_page_default.php:19
+msgid "Taxonomy"
+msgstr "Taxonomía"
+
+#: views/admin/templates/generate_terms_page.php:31
 msgid ""
 "You can specify the \"slug\" and \"description\" for each term by seperating "
 "them with commas."
 msgstr ""
-"Puede especificar la \"babosa\" y \"descripción\" para cada término por "
-"seperating em con comas."
+"Puedes especificar el 'slug' y la 'descripción' para cada término, "
+"separándolos con comas"
 
-#: ../views/admin/templates/generate_terms_page.php:32
-msgid "(ie: United States, united_states, Population is 317 Million)"
-msgstr "(Es decir: México, mexico, Población es de 122 millones)"
+#: classes/class-bulk-term-generator-admin.php:252
+msgid "Your terms haven't been created yet!"
+msgstr "¡Tus términos aún no han sido creados!"
 
-#: ../views/admin/templates/generate_terms_page.php:39
-msgid "Parent"
-msgstr "Principal"
+#: views/admin/templates/generate_terms_page.php:15
+msgid "Your Terms:"
+msgstr "Tus Términos"
 
-#: ../views/admin/templates/generate_terms_page.php:44
-msgid "(Sorry, this taxonomy isn't hierarchical)"
-msgstr "(Lo siento, esta taxonomía no es jerárquica)"
+#: classes/class-bulk-term-generator-admin.php:261
+msgid "{0} term has been added"
+msgstr "Se ha añadido {0} término"
 
-#: ../views/admin/templates/generate_terms_page.php:54
-msgid "Add Terms to Queue"
-msgstr "Añadir término a la cola"
-
-#: ../views/admin/templates/generate_terms_page.php:55
-msgid "Generate Terms"
-msgstr "Generar Términos"
-
-#: ../views/admin/templates/generate_terms_page.php:74
-msgid "About"
-msgstr "Acerca de"
-
-#: ../views/admin/templates/generate_terms_page.php:76
-msgid ""
-"<strong>Bulk Term Generator</strong> was developed by Nate Allen, Senior Web "
-"Developer at <a href=\"http://fireflypartners.com\">Firefly Partners</a>."
-msgstr ""
-"<strong>Bulk Term Generator</strong> fue desarrollada por Nate Allen, "
-"Tercera Web Developer en <a href=\"http://fireflypartners.com\">Firefly "
-"Partners</a>."
-
-#: ../views/admin/templates/generate_terms_page.php:82
-msgid "Support"
-msgstr "Apoyo"
-
-#: ../views/admin/templates/generate_terms_page.php:84
-msgid ""
-"If need help, check out the support page for the plugin. I will do my best "
-"to answer questions or patch bugs. Please be patient; this is a free plugin "
-"and I have a full-time job. :)"
-msgstr ""
-"Si necesita ayuda, echa un vistazo a la página de soporte para el plugin. "
-"Haré todo lo posible para responder a los problemas o errores de conexión. "
-"Por favor sea paciente; este es un plugin gratuito y tengo un trabajo de "
-"tiempo completo. :)"
-
-#: ../views/admin/templates/generate_terms_page.php:90
-msgid "Feedback"
-msgstr "Realimentación"
-
-#: ../views/admin/templates/generate_terms_page.php:92
-msgid ""
-"Do you have an idea for an improvement? <a href=\"mailto:email@ncallen.com"
-"\">Email me</a> and I'll see what I can do. Or better yet, <a href=\"https://"
-"github.com/nate-allen/bulk-term-generator\">contribute code to the Github "
-"repository</a>!"
-msgstr ""
-"¿Tiene una idea para una mejora? <a href=\"mailto:email@ncallen.com"
-"\">Envíeme por correo electrónico</a> y voy a ver qué puedo hacer. O mejor "
-"aún, código contribuer a Github!"
-
-#: ../views/admin/templates/settings_page_default.php:11
-msgid "First, choose a taxonomy you'd like to add terms to:"
-msgstr "En primer lugar, elegir una taxonomía que desea añadir términos a:"
-
-#: ../views/admin/templates/settings_page_default.php:19
-msgid "Taxonomy"
-msgstr "Taxonomía"
-
-#: ../views/admin/templates/settings_page_default.php:29
-msgid "Select Taxonomy"
-msgstr "Seleccione Taxonomía"
+#: classes/class-bulk-term-generator-admin.php:262
+msgid "{0} terms have been added"
+msgstr "Se han añadido {0} términos"
