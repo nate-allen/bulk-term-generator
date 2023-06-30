@@ -4,33 +4,32 @@
  * Define the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin
-  */
-class Bulk_Term_Generator_i18n {
+ */
 
-    /**
-     * The domain specified for this plugin.
-     */
-    private $domain;
+class Bulk_Term_Generator_I18n {
 
-    /**
-     * Load the plugin text domain for translation.
-     */
-    public function load_plugin_textdomain() {
+	/**
+	 * The domain specified for this plugin.
+	 */
+	private string $domain;
 
-        $load_plugin_textdomain = load_plugin_textdomain(
-            $this->domain,
-            false,
-             dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-        );
+	/**
+	 * Load the plugin text domain for translation.
+	 */
+	public function load_plugin_textdomain() {
+		load_plugin_textdomain(
+			$this->domain,
+			false,
+			dirname( plugin_basename( __FILE__ ), 2 ) . '/languages/'
+		);
+	}
 
-    }
-
-    /**
-     * Set the domain equal to that of the specified domain.
-     * @param    string    $domain    The domain that represents the locale of this plugin.
-     */
-    public function set_domain( $domain ) {
-        $this->domain = $domain;
-    }
-
+	/**
+	 * Set the domain equal to that of the specified domain.
+	 *
+	 * @param string $domain The domain that represents the locale of this plugin.
+	 */
+	public function set_domain( string $domain ) {
+		$this->domain = $domain;
+	}
 }

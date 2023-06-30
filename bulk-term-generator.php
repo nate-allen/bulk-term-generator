@@ -26,13 +26,15 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-    die;
+	die;
 }
 
 /**
  * Define a constant for the plugin path
  */
-define("BULK_TERM_GENERATOR_PATH", plugin_dir_path(__FILE__) );
+function_exists( 'get_plugin_data' ) || require_once ABSPATH . 'wp-admin/includes/plugin.php';
+define( 'BULK_TERM_GENERATOR_METADATA', get_plugin_data( __FILE__, false, false ) );
+define( 'BULK_TERM_GENERATOR_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
  * Use an autoloader to load classes automatically
@@ -40,33 +42,31 @@ define("BULK_TERM_GENERATOR_PATH", plugin_dir_path(__FILE__) );
 spl_autoload_register( 'bulk_term_generator_autoloader' );
 
 function bulk_term_generator_autoloader( $class ) {
+	$class = strtolower( str_replace( '_', '-', $class ) );
 
-    $class = strtolower( str_replace('_', '-', $class) );
+	// If it's not one of my classes, ignore it
+	if ( substr( $class, 0, 19 ) !== 'bulk-term-generator' ) {
+		return false;
+	}
 
-    // If it's not one of my classes, ignore it
-    if ( substr( $class, 0, 19 ) != 'bulk-term-generator' )
-        return false;
-
-    // Check if the file exists, and if it does, include it
-    if ( file_exists ( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php' ) ){
-
-        include( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php');
-
-    }
+	// Check if the file exists, and if it does, include it
+	if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php' ) ) {
+		include plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php';
+	}
 }
 
 /**
  * The code that runs during plugin activation.
  */
 function activate_bulk_term_generator() {
-    Bulk_Term_Generator_Activator::activate();
+	Bulk_Term_Generator_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  */
 function deactivate_bulk_term_generator() {
-    Bulk_Term_Generator_Deactivator::deactivate();
+	Bulk_Term_Generator_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_bulk_term_generator' );
@@ -76,9 +76,8 @@ register_deactivation_hook( __FILE__, 'deactivate_bulk_term_generator' );
  * Begins execution of the plugin.
  */
 function run_bulk_term_generator() {
-
-    $plugin = new Bulk_Term_Generator();
-    $plugin->run();
-
+	$plugin = new Bulk_Term_Generator();
+	$plugin->run();
 }
+
 run_bulk_term_generator();
