@@ -59,6 +59,7 @@
 				<th scope="row"><label for="parent-term"><?php esc_html_e( 'Parent', 'bulk-term-generator' ); ?></label></th>
 				<td>
 					<?php if ( $is_hierarchical ) : ?>
+						<option value="">No Parent</option>
 						<?php
 						echo wp_kses(
 							$term_select_list,
