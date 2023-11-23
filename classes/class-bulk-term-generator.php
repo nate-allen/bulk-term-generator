@@ -92,6 +92,7 @@ class Bulk_Term_Generator {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_to_menu' );
 		$this->loader->add_action( 'wp_ajax_btg_add_term', $plugin_admin, 'add_term' );
 		$this->loader->add_action( 'init', $plugin_admin, 'taxonomy_select' );
+		$this->loader->add_filter( 'all_plugins', $plugin_admin, 'modify_plugin_title', 10, 4 );
 
 		$taxonomies = get_taxonomies();
 		foreach ( $taxonomies as $taxonomy ) {

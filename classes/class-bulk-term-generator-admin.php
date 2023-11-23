@@ -151,6 +151,21 @@ class Bulk_Term_Generator_Admin {
 
 	}
 
+	/**
+	 * Changes the title of the plugin on the plugins page
+	 *
+	 * @param array $plugins Array of plugins
+	 *
+	 * @return array Modified array of plugins
+	 */
+	public function modify_plugin_title( $plugins ) {
+		if ( isset( $plugins[ 'bulk-term-generator/bulk-term-generator.php' ] ) ) {
+			$plugins[ 'bulk-term-generator/bulk-term-generator.php' ]['Name'] = esc_html__( 'Bulk Term Generator', 'bulk-term-generator' );
+		}
+
+		return $plugins;
+	}
+
 	public function add_term() {
 
 		$term_name = $_POST['term_name']; // phpcs:ignore WordPress.Security.NonceVerification.Missing
