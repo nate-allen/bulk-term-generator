@@ -2,7 +2,7 @@
   "landingPage": "\/wp-admin\/tools.php?page=bulk_term_generator_options",
   "preferredVersions": {
     "php": "7.4",
-    "wp": "5.9"
+    "wp": "6.4.1"
   },
   "phpExtensionBundles": [
     "kitchen-sink"
