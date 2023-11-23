@@ -12,7 +12,7 @@
  * Plugin Name:       Bulk Term Generator - Import multiple tags, categories, and taxonomies easily
  * Plugin URI:        http://nateallen.com/wordpress-plugins/bulk-term-generator
  * Description:       Streamline taxonomy management in WordPress with Bulk Term Generator, your free tool for easy, bulk term importing.
- * Version:           1.3.2
+ * Version:           1.3.3
  * Requires at least: 3.1
  * Tested up to:      6.4.1
  * Requires PHP:      7.4
