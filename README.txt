@@ -70,6 +70,11 @@ A: No, Bulk Term Generator is primarily focused on importing terms into WordPres
 
 == Changelog ==
 
+= 1.3.3 =
+* Shortened the plugin name in the admin
+* Tested with WordPress 6.4.1
+* Added blueprint to enable plugin directory's preview button
+
 = 1.3.2 =
 * Fixed comma escaping only escapes first comma
 * Updated the FAQ
