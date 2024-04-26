@@ -167,7 +167,6 @@ class Bulk_Term_Generator_Template {
 		$html .= '</select>';
 
 		return $html;
-
 	}
 
 	/**
@@ -191,10 +190,10 @@ class Bulk_Term_Generator_Template {
 
 		// Get all of the terms for the given taxonomy
 		$terms = get_terms(
-			$options['taxonomy'],
 			array(
 				'hide_empty' => false,
 				'parent'     => 0,
+				'taxonomy'   => $options['taxonomy'],
 			)
 		);
 
@@ -213,7 +212,6 @@ class Bulk_Term_Generator_Template {
 		$html .= '</select>';
 
 		return $html;
-
 	}
 
 	/**
@@ -239,10 +237,10 @@ class Bulk_Term_Generator_Template {
 
 		// Get all of the terms for the given taxonomy.
 		$terms = get_terms(
-			$options['taxonomy'],
 			array(
 				'hide_empty' => false,
 				'parent'     => 0,
+				'taxonomy'   => $options['taxonomy'],
 			)
 		);
 
@@ -274,10 +272,10 @@ class Bulk_Term_Generator_Template {
 	public function term_list( string $taxonomy ): array {
 		// Get all of the terms for the given taxonomy.
 		$terms = get_terms(
-			$taxonomy,
 			array(
 				'hide_empty' => false,
 				'parent'     => 0,
+				'taxonomy'   => $taxonomy,
 			)
 		);
 
@@ -325,10 +323,10 @@ class Bulk_Term_Generator_Template {
 		$this->select_options .= '<option value="' . $term->term_id . '" data-parent="' . $term->parent . '" data-name="' . $term->name . '">' . $this->get_separators( $term->term_id, $taxonomy ) . $term->name . '</option>';
 
 		$children = get_terms(
-			$taxonomy,
 			array(
 				'parent'     => $term->term_id,
 				'hide_empty' => '0',
+				'taxonomy'   => $taxonomy,
 			)
 		);
 
@@ -351,10 +349,10 @@ class Bulk_Term_Generator_Template {
 	 */
 	private function get_list_items( string $taxonomy, object $term, $ul ) {
 		$children = get_terms(
-			$taxonomy,
 			array(
 				'parent'     => $term->term_id,
 				'hide_empty' => '0',
+				'taxonomy'   => $taxonomy,
 			)
 		);
 
@@ -384,10 +382,10 @@ class Bulk_Term_Generator_Template {
 	private function get_terms_array( string $taxonomy, object $term ): void {
 		// Get all of the terms for the given taxonomy.
 		$children = get_terms(
-			$taxonomy,
 			array(
 				'hide_empty' => false,
 				'parent'     => $term->term_id,
+				'taxonomy'   => $taxonomy,
 			)
 		);
 

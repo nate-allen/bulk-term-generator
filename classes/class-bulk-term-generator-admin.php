@@ -110,7 +110,12 @@ class Bulk_Term_Generator_Admin {
 			$taxonomy       = get_taxonomy( $_GET['taxonomy'] ); // phpcs:ignore WordPress.Security.NonceVerification
 			$taxonomy_slug  = $_GET['taxonomy']; // phpcs:ignore WordPress.Security.NonceVerification
 			$taxonomy_name  = $taxonomy->labels->name;
-			$taxonomy_terms = get_terms( $_GET['taxonomy'], array( 'hide_empty' => false ) ); // phpcs:ignore WordPress.Security.NonceVerification
+			$taxonomy_terms = get_terms(
+				array(
+					'hide_empty' => false,
+					'taxonomy'   => $_GET['taxonomy'], // phpcs:ignore WordPress.Security.NonceVerification
+				)
+			);
 
 			$this->data['is_hierarchical']  = $taxonomy->hierarchical;
 			$this->data['taxonomy_slug']    = $taxonomy_slug;
