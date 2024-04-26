@@ -284,7 +284,7 @@ class Bulk_Term_Generator_Admin {
 			array(
 				'btg_terms_list' => $json_list,
 				'admin_url'      => admin_url( 'admin-ajax.php' ),
-				'plugin_dir'     => plugins_url( '', dirname( __FILE__ ) ),
+				'plugin_dir'     => plugins_url( '', __DIR__ ),
 				'taxonomy'       => $taxonomy,
 				'i18n'           => array(
 					'creating'              => __( 'Creating', 'bulk-term-generator' ),
@@ -311,5 +311,4 @@ class Bulk_Term_Generator_Admin {
 
 		echo $template->render(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
-
 }

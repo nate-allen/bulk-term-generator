@@ -207,7 +207,6 @@ class Bulk_Term_Generator_Template {
 			$this->get_select_options( $options['taxonomy'], $term );
 		}
 
-
 		$html .= $this->select_options;
 
 		$html .= '</select>';
@@ -321,7 +320,14 @@ class Bulk_Term_Generator_Template {
 	 * @param object $term The term object
 	 */
 	private function get_select_options( string $taxonomy, object $term ) {
-		$this->select_options .= '<option value="' . $term->term_id . '" data-parent="' . $term->parent . '" data-name="' . $term->name . '">' . $this->get_separators( $term->term_id, $taxonomy ) . $term->name . '</option>';
+		$this->select_options .= sprintf(
+			'<option value="%s" data-parent="%s" data-name="%s">%s%s</option>',
+			$term->term_id,
+			$term->parent,
+			htmlspecialchars( $term->name, ENT_QUOTES, 'UTF-8' ),
+			$this->get_separators( $term->term_id, $taxonomy ),
+			htmlspecialchars( $term->name, ENT_QUOTES, 'UTF-8' )
+		);
 
 		$children = get_terms(
 			array(

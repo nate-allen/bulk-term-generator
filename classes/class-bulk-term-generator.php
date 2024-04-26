@@ -62,9 +62,7 @@ class Bulk_Term_Generator {
 	 * with WordPress.
 	 */
 	private function load_dependencies() {
-
 		$this->loader = new Bulk_Term_Generator_Loader();
-
 	}
 
 	/**
