@@ -14,7 +14,7 @@
  * Description:       Streamline taxonomy management in WordPress with Bulk Term Generator, your free tool for easy, bulk term importing.
  * Version:           1.3.3
  * Requires at least: 3.1
- * Tested up to:      6.4.1
+ * Tested up to:      6.5.2
  * Requires PHP:      7.4
  * Author:            Nate Allen
  * Author URI:        http://nateallen.com/

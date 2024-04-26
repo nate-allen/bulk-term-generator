@@ -2,7 +2,7 @@
 Contributors: nateallen
 Tags: add multiple terms,bulk import,terms,tags,categories,taxonomy,add,multiple,mass,keywords,taxonomies,generate
 Requires at least: 3.1
-Tested up to: 6.2
+Tested up to: 6.5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -15,7 +15,7 @@ Are you tired of manually adding terms in WordPress one by one? Do you find CSV 
 
 Bulk Term Generator allows you to seamlessly import multiple terms to your selected taxonomies in WordPress. Its powerful yet easy-to-use interface lets you copy and paste your terms, queue them up, and even select a parent term for hierarchy. No need for pre-formatted CSV files or meticulous manual entry. You can even specify the slug and description for each term, making your content even more search-friendly.
 
-But the magic doesn’t stop there. Bulk Term Generator gives you total control before you import your terms. With its unique 'Preview' feature, you can see exactly how your terms will be added and make any necessary changes before hitting the final "Generate Terms" button. Plus, you can edit or delete any queued term at any point with just a click.
+But the magic doesn't stop there. Bulk Term Generator gives you total control before you import your terms. With its unique 'Preview' feature, you can see exactly how your terms will be added and make any necessary changes before hitting the final "Generate Terms" button. Plus, you can edit or delete any queued term at any point with just a click.
 
 Bulk Term Generator has been lauded as a 'lifesaver' and a 'developer's dream' by our users, and we are confident you will think the same:
 
@@ -23,7 +23,7 @@ Bulk Term Generator has been lauded as a 'lifesaver' and a 'developer's dream' b
  ---
 > "Recently used this for a client to import 43 terms in multiple hierarchical levels. So much quicker than going about it individually." - Brian Fischer
  ---
-> "I tried a few other plugins to bulk add taxonomy terms but none of them were intuitive. This plugin is the only one that you’ll ever need. It does everything I expected and more!" - Andrew Schultz
+> "I tried a few other plugins to bulk add taxonomy terms but none of them were intuitive. This plugin is the only one that you'll ever need. It does everything I expected and more!" - Andrew Schultz
 
 Bulk Term Generator supports both English and Spanish, and we're planning to add more languages in the future. Plus, it's 100% free. No hidden costs or premium versions.
 
