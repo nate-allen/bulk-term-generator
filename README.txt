@@ -73,7 +73,7 @@ A: No, Bulk Term Generator is primarily focused on importing terms into WordPres
 = 1.4.0 =
 * Tested with WordPress 6.5.2
 * Improved coding standards
-* Added a blank option to parent select field
+* Added a blank option to parent select field (hat tip to @EarthmanWeb)
 * Refactored get_terms usage to align with updated WordPress standards
 
 = 1.3.3 =
