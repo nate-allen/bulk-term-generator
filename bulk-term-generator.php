@@ -41,17 +41,17 @@ define( 'BULK_TERM_GENERATOR_PATH', plugin_dir_path( __FILE__ ) );
  */
 spl_autoload_register( 'bulk_term_generator_autoloader' );
 
-function bulk_term_generator_autoloader( $class ) {
-	$class = strtolower( str_replace( '_', '-', $class ) );
+function bulk_term_generator_autoloader( $class_name ) {
+	$class_name = strtolower( str_replace( '_', '-', $class_name ) );
 
 	// If it's not one of my classes, ignore it
-	if ( substr( $class, 0, 19 ) !== 'bulk-term-generator' ) {
+	if ( substr( $class_name, 0, 19 ) !== 'bulk-term-generator' ) {
 		return false;
 	}
 
 	// Check if the file exists, and if it does, include it
-	if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php' ) ) {
-		include plugin_dir_path( __FILE__ ) . 'classes/class-' . $class . '.php';
+	if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class_name . '.php' ) ) {
+		include plugin_dir_path( __FILE__ ) . 'classes/class-' . $class_name . '.php';
 	}
 }
 
