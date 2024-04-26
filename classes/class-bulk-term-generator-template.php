@@ -201,11 +201,12 @@ class Bulk_Term_Generator_Template {
 		$html = '<select id="' . $options['id'] . '" name="' . $options['id'] . '" class="' . $options['class'] . '">';
 
 		// Reset the selection options variable
-		$this->select_options = '';
+		$this->select_options = '<option value=""></option>';
 
 		foreach ( $terms as $term ) {
 			$this->get_select_options( $options['taxonomy'], $term );
 		}
+
 
 		$html .= $this->select_options;
 
