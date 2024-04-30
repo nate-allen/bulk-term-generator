@@ -1,7 +1,6 @@
 === Bulk Term Generator - Import multiple tags, categories, and taxonomies easily ===
 Contributors: nateallen
-Tags: add multiple terms,bulk import,terms,tags,categories,taxonomy,add,multiple,mass,keywords,taxonomies,generate
-Requires at least: 3.1
+Tags: add multiple,import,terms,tags,categories
 Tested up to: 6.5.2
 Stable tag: trunk
 License: GPLv2 or later
@@ -37,29 +36,37 @@ Join our growing community of efficient and happy WordPress users today. Choose 
 
 == Frequently Asked Questions ==
 
-Q. I need to add a comma to my term name or description, but this breaks things!
-A. You can escape commas by adding backslash before it, like this: Boston\, MA
+= I need to add a comma to my term name or description, but this breaks things! =
 
-Q. Can I edit existing terms with this plugin?
-A. No, this plugin is currently for adding new terms only. We may add this feature in the future.
+You can escape commas by adding backslash before it, like this: Boston\, MA
 
-Q. Can I set the meta fields for the terms I'm adding?
-A. This plugin lets you set the slug and description for each term, but not other meta fields.
+= Can I edit existing terms with this plugin? =
 
-Q: Is it possible to import terms from a specific CSV file or external data source?
-A: Bulk Term Generator doesn't support importing terms directly from CSV files or external data sources. However, you can copy and paste your terms into the plugin's interface, making it quick and convenient to import them.
+No, this plugin is currently for adding new terms only. We may add this feature in the future.
 
-Q: Can I schedule term imports to occur automatically at specific intervals?
-A: Currently, Bulk Term Generator doesn't have a built-in scheduling feature to automate term imports at specific intervals. Let us know if you'd like to see this feature added in the future.
+= Can I set the meta fields for the terms I'm adding? =
 
-Q: Does Bulk Term Generator handle hierarchical term structures?
-A: Yes, Bulk Term Generator allows you to create hierarchical term structures by specifying parent terms during the import process. This feature simplifies the creation of complex taxonomies with nested terms.
+This plugin lets you set the slug and description for each term, but not other meta fields.
 
-Q: Can I import terms into multiple taxonomies simultaneously?
-A: No, currently the only way to import terms is to select a single taxonomy first. However, you can import terms into multiple taxonomies by repeating the import process for each taxonomy.
+= Is it possible to import terms from a specific CSV file or external data source? =
 
-Q: Can I export terms from WordPress using Bulk Term Generator?
-A: No, Bulk Term Generator is primarily focused on importing terms into WordPress. It doesn't provide an export functionality. For exporting terms, you may consider using other WordPress plugins or built-in WordPress export tools.
+Bulk Term Generator doesn't support importing terms directly from CSV files or external data sources. However, you can copy and paste your terms into the plugin's interface, making it quick and convenient to import them.
+
+= Can I schedule term imports to occur automatically at specific intervals? =
+
+Currently, Bulk Term Generator doesn't have a built-in scheduling feature to automate term imports at specific intervals. Let us know if you'd like to see this feature added in the future.
+
+= Does Bulk Term Generator handle hierarchical term structures? =
+
+Yes, Bulk Term Generator allows you to create hierarchical term structures by specifying parent terms during the import process. This feature simplifies the creation of complex taxonomies with nested terms.
+
+= Can I import terms into multiple taxonomies simultaneously? =
+
+No, currently the only way to import terms is to select a single taxonomy first. However, you can import terms into multiple taxonomies by repeating the import process for each taxonomy.
+
+= Can I export terms from WordPress using Bulk Term Generator? =
+
+No, Bulk Term Generator is primarily focused on importing terms into WordPress. It doesn't provide an export functionality. For exporting terms, you may consider using other WordPress plugins or built-in WordPress export tools.
 
 == Screenshots ==
 
