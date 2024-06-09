@@ -1,12 +1,11 @@
 <?php
-
 /**
- * Define the internationalization functionality.
- *
  * Loads and defines the internationalization files for this plugin
  */
 
-class Bulk_Term_Generator_I18n {
+namespace BulkTermGenerator;
+
+class I18n {
 
 	/**
 	 * The domain specified for this plugin.

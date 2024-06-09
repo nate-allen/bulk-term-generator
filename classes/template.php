@@ -1,6 +1,16 @@
 <?php
+/**
+ * Template class
+ *
+ * This class is used to render templates. It can be used to render a template
+ * file with data passed to it.
+ *
+ * @package BulkTermGenerator
+ */
 
-class Bulk_Term_Generator_Template {
+namespace BulkTermGenerator;
+
+class Template {
 
 	/**
 	 * The path to the template file
@@ -188,7 +198,7 @@ class Bulk_Term_Generator_Template {
 		// Combine default options with passed arguments.
 		$options = array_merge( $defaults, $args );
 
-		// Get all of the terms for the given taxonomy
+		// Get all the terms for the given taxonomy
 		$terms = get_terms(
 			array(
 				'hide_empty' => false,
@@ -235,7 +245,7 @@ class Bulk_Term_Generator_Template {
 		// Combine default options with passed arguments.
 		$options = array_merge( $defaults, $args );
 
-		// Get all of the terms for the given taxonomy.
+		// Get all the terms for the given taxonomy.
 		$terms = get_terms(
 			array(
 				'hide_empty' => false,
@@ -270,7 +280,7 @@ class Bulk_Term_Generator_Template {
 	 * @return array An array of terms
 	 */
 	public function term_list( string $taxonomy ): array {
-		// Get all of the terms for the given taxonomy.
+		// Get all the terms for the given taxonomy.
 		$terms = get_terms(
 			array(
 				'hide_empty' => false,

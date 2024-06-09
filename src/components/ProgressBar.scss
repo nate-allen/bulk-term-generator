@@ -1,0 +1,75 @@
+@keyframes animateProgressBar {
+
+	0% {
+		left: -50%;
+	}
+
+	100% {
+		left: 100%;
+	}
+}
+
+.progress-bar-wrapper {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+
+	.progress-bar-label {
+		white-space: nowrap;
+		margin: 0 1rem;
+		min-width: 40px;
+		font-size: 15px;
+		letter-spacing: 1px;
+		text-align: center;
+		font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+		font-weight: 500;
+
+		span {
+			margin-left: 3px;
+		}
+	}
+}
+
+.progress-bar-track {
+	position: relative;
+	overflow: hidden;
+	height: 20px; /* Replace with CONFIG.borderWidthFocus */
+	background-color: rgba(0, 0, 0, 0.1); /* Replace with COLORS.theme.foreground at 10% opacity */
+	border-radius: 4px; /* Replace with CONFIG.radiusBlockUi */
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+	width: 100%;
+	flex-grow: 1;
+}
+
+.progress-bar-indicator {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	border-radius: 4px; /* Replace with CONFIG.radiusBlockUi */
+	background-color: #3858e9; /* Replace with COLORS.theme.foreground at 90% opacity */
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+}
+
+.progress-bar-indicator.indeterminate {
+	animation-duration: 1.5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-name: animateProgressBar;
+	width: 50%; /* Replace with INDETERMINATE_TRACK_WIDTH */
+}
+
+.progress-bar-indicator.determinate {
+	transition: width 0.4s ease-in-out;
+}
+
+.progress-bar-element {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+}

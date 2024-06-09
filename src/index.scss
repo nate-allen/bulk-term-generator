@@ -1,0 +1,286 @@
+h1.bulk-term-generator-title {
+	margin: 0.2em 0 0.5em 0;
+	padding: 0 0 0.5em;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	color: #32373c;
+	line-height: 1.2;
+	font-size: 2.8em;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+
+	.version {
+		padding: 4px 8px;
+		font-size: 14px;
+		font-weight: 700;
+		border-radius: 3px;
+		background: #fff;
+		margin: 0 0 0 10px;
+	}
+}
+
+.bulk-term-generator {
+	padding: 10px 10px 10px 0;
+	font-family: Arial, sans-serif;
+
+	h1 {
+		font-size: 24px;
+		margin-bottom: 2rem;
+	}
+
+	h2 {
+		margin-top: 0;
+	}
+
+	.taxonomy-select {
+		margin-bottom: 10px;
+	}
+
+	.form-and-tree-container {
+		display: flex;
+	}
+
+	.add-term-form,
+	.edit-term-form {
+		width: 66%;
+		padding-right: 10px;
+	}
+
+	.term-tree-container {
+		background-color: #fff;
+		width: 33%;
+		border: 1px solid #ccc;
+		padding: 10px;
+		max-height: 500px;
+		overflow-y: auto;
+		position: relative;
+
+		.taxonomy-name {
+			text-transform: uppercase;
+			margin: 0 0 1rem;
+			font-weight: 700;
+		}
+	}
+
+	.add-terms-textarea,
+	.parent-select,
+	.edit-term-form {
+		margin-bottom: 10px;
+	}
+
+	.add-terms-textarea textarea {
+		min-height: 345px;
+	}
+
+	.add-terms-button,
+	.edit-term-form button {
+		margin-top: 10px;
+		display: inline-block;
+		margin-right: 1rem;
+	}
+
+	.term-tree {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li {
+			position: relative;
+			display: block;
+			margin-bottom: 5px;
+			padding-left: 21px;
+
+			.term-content {
+				display: flex;
+				align-items: center;
+				min-height: 26px;
+				line-height: 1;
+				padding-left: 5px;
+				font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+				&::before {
+					content: "";
+					width: 13px;
+					height: 10px;
+					position: absolute;
+					background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 100%);
+					top: 7px;
+					margin: auto;
+					left: 11px;
+					z-index: 2;
+				}
+
+				.term-name {
+					flex-grow: 1;
+				}
+
+				button {
+					display: none;
+					background-color: transparent;
+					border: 0;
+					cursor: pointer;
+					padding: 0;
+					height: 26px;
+					min-width: 26px;
+					color: #474646;
+
+					&.edit-button:hover {
+						color: #005ad8;
+					}
+
+					&.delete-button:hover {
+						color: #dc3545;
+					}
+
+					&:active,
+					&:focus {
+						border: 0;
+						box-shadow: none;
+						outline: none;
+					}
+				}
+
+				&:hover {
+					background-color: #f1f9f7;
+					cursor: pointer;
+
+					> button {
+						display: inline-block;
+					}
+				}
+			}
+
+			&::before,
+			&::after {
+				content: "";
+				position: absolute;
+				display: block;
+				background-color: #dcdcdc;
+			}
+
+			&::before {
+				top: 0;
+				left: 10px;
+				width: 1px;
+				height: calc(100% + 5px);
+			}
+
+			&::after {
+				top: 0;
+				left: 10px;
+				width: 11px;
+				height: 11px;
+				background: transparent;
+				border-bottom: 1px solid #dcdcdc;
+				border-left: 1px solid #dcdcdc;
+				border-bottom-left-radius: 5px;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+
+				&::before {
+					height: 0;
+				}
+			}
+
+			&:first-child {
+
+				&::before {
+					top: -5px;
+					height: calc(100% + 10px);
+				}
+			}
+
+			&:only-child::before {
+				top: -5px;
+				height: 0;
+			}
+
+			&.new-term > .term-content > .term-name {
+				color: #7a7a7a;
+				font-style: italic;
+			}
+		}
+	}
+
+	.components-notice {
+		margin-bottom: 1rem;
+	}
+
+	.add-terms-wrapper{
+		position: relative;
+
+		.ai-generator {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			margin: 0 1rem 1rem 0;
+			display: flex;
+			align-items: center;
+			background: #111;
+
+			&:hover {
+				background: #444;
+
+				.components-spinner {
+
+					circle {
+						stroke: #666;
+					}
+				}
+			}
+
+			&:active {
+				background: #333;
+				border-color: transparent;
+			}
+
+			&:focus {
+				box-shadow: none;
+			}
+
+			.ai-icon {
+				margin-right: 8px;
+
+				svg {
+					margin: 0;
+				}
+			}
+
+			.brainstorming {
+				padding-right: 13px;
+
+				&:after {
+					overflow: hidden;
+					display: inline-block;
+					vertical-align: bottom;
+					-webkit-animation: ellipsis steps(4, end) 1s infinite;
+					animation: ellipsis steps(4, end) 900ms infinite;
+					content: "\2026";
+					width: 0;
+					position: absolute;
+				}
+			}
+
+			@keyframes ellipsis {
+				to {
+					width: 18px;
+				}
+			}
+
+			.components-spinner {
+				circle {
+					stroke: #444;
+				}
+
+				path {
+					color: #fff;
+				}
+			}
+		}
+	}
+
+	.parent-select {
+		max-width: 275px;
+	}
+}

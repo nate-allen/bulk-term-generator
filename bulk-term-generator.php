@@ -35,49 +35,46 @@ if ( ! defined( 'WPINC' ) ) {
 function_exists( 'get_plugin_data' ) || require_once ABSPATH . 'wp-admin/includes/plugin.php';
 define( 'BULK_TERM_GENERATOR_METADATA', get_plugin_data( __FILE__, false, false ) );
 define( 'BULK_TERM_GENERATOR_PATH', plugin_dir_path( __FILE__ ) );
+define( 'BULK_TERM_GENERATOR_URL', plugin_dir_url( __FILE__ ) );
 
 /**
  * Use an autoloader to load classes automatically
  */
 spl_autoload_register( 'bulk_term_generator_autoloader' );
 
+/**
+ * Autoloader for the BulkTermGenerator namespace.
+ *
+ * This function is registered with spl_autoload_register and automatically
+ * loads class files when a class with the BulkTermGenerator namespace is used.
+ * The class name is converted to lowercase and backslashes are replaced with
+ * slashes to match the file path structure.
+ *
+ * @param string $class_name The fully-qualified name of the class to load.
+ * @return void
+ */
 function bulk_term_generator_autoloader( $class_name ) {
-	$class_name = strtolower( str_replace( '_', '-', $class_name ) );
-
-	// If it's not one of my classes, ignore it
-	if ( substr( $class_name, 0, 19 ) !== 'bulk-term-generator' ) {
-		return false;
+	// If the namespace isn't BulkTermGenerator, return
+	if ( strpos( $class_name, 'BulkTermGenerator\\' ) !== 0 ) {
+		return;
 	}
+
+	// Remove the namespace from the class name and replace backslashes with slashes
+	$class_name = str_replace( array( 'BulkTermGenerator\\', '\\' ), array( '', '/' ), $class_name );
+
+	// Construct the file path
+	$file_path = BULK_TERM_GENERATOR_PATH . 'classes/' . strtolower( $class_name ) . '.php';
 
 	// Check if the file exists, and if it does, include it
-	if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-' . $class_name . '.php' ) ) {
-		include plugin_dir_path( __FILE__ ) . 'classes/class-' . $class_name . '.php';
+	if ( file_exists( $file_path ) ) {
+		include $file_path;
 	}
 }
-
-/**
- * The code that runs during plugin activation.
- */
-function activate_bulk_term_generator() {
-	Bulk_Term_Generator_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- */
-function deactivate_bulk_term_generator() {
-	Bulk_Term_Generator_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate_bulk_term_generator' );
-register_deactivation_hook( __FILE__, 'deactivate_bulk_term_generator' );
 
 /**
  * Begins execution of the plugin.
  */
 function run_bulk_term_generator() {
-	$plugin = new Bulk_Term_Generator();
-	$plugin->run();
+	( new \BulkTermGenerator\Plugin() )->initialize();
 }
-
-run_bulk_term_generator();
+add_action( 'plugins_loaded', 'run_bulk_term_generator' );
